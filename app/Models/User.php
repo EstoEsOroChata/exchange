@@ -46,6 +46,7 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    
 // Para guardar registros en minúscula y devolverlos con la primera letra en mayúscula
     protected function name(): Attribute
     {
