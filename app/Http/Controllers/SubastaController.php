@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSubasta;
 use App\Models\Subasta;
 use Illuminate\Http\Request;
 
@@ -18,16 +19,9 @@ class SubastaController extends Controller
         return view('subastas.create');
     }
 
-    public function store(Request $request){
-        $subasta = new Subasta();
+    public function store(StoreSubasta $request){
 
-        $subasta->nombre = $request->nombre;
-        $subasta->cantidad = $request->cantidad;
-        $subasta->puja = $request->puja;
-        $subasta->precio = $request->precio;
-        $subasta->fecha_limite = $request->fecha_limite;
-
-        $subasta->save();
+        $subasta = Subasta::create($request->all());
 
         return redirect()->route('subastas.show', $subasta);
     }
@@ -42,16 +36,17 @@ class SubastaController extends Controller
         return view('subastas.edit', compact('subasta'));
     }
 
-    public function update(Request $request, Subasta $subasta) {
+    public function update(StoreSubasta $request, Subasta $subasta) {
 
-        $subasta->nombre = $request->nombre;
-        $subasta->cantidad = $request->cantidad;
-        $subasta->puja = $request->puja;
-        $subasta->precio = $request->precio;
-        $subasta->fecha_limite = $request->fecha_limite;
-
-        $subasta->save();
+        $subasta->update($request->all());
 
         return redirect()->route('subastas.show', $subasta);
+    }
+
+    public function destroy(Subasta $subasta){
+
+            $subasta->delete();
+
+            return redirect()->route('subastas.index');
     }
 }

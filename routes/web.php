@@ -17,3 +17,5 @@ Route::get('subastas/{subasta}', [SubastaController::class, 'show'])->name('suba
 Route::get('subastas/{subasta}/edit', [SubastaController::class, 'edit'])->name('subastas.edit');
 
 Route::put('subastas/{subasta}', [SubastaController::class, 'update'])->name('subastas.update');
+
+Route::delete('subastas/{subasta}', [SubastaController::class, 'destroy'])->name('subastas.destroy');
