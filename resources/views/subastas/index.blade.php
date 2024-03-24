@@ -10,7 +10,9 @@
         {{-- Recorro por todas las filas de  la tabla con un foreach y lo muestro en una lista --}}
         @foreach ($subastas as $subasta)
             <li>
-                <a href="{{route('subastas.show', $subasta->id)}}">{{$subasta->nombre}}</a>
+                <a href="{{route('subastas.show', $subasta)}}">
+                    {{$subasta->nombre}}
+                </a>
             </li>
         @endforeach
     </ul>

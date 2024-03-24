@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('subastas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->string('slug');
             //$table->string('imagen');
             $table->integer('cantidad');
             $table->integer('puja');
