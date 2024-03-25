@@ -8,6 +8,8 @@
             </li>
             <li><a href="{{route('nosotros')}}" class="{{request()->RouteIs('nosotros') ? 'active' : ''}}">Sobre nosotros</a>
             </li>
+            <li><a href="{{route('contacto.index')}}" class="{{request()->RouteIs('contacto.index') ? 'active' : ''}}">Contáctanos</a>
+            </li>
         </ul>
     </nav>
 </header>
