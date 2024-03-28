@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Usuario;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -12,13 +12,13 @@ class LoginController extends Controller
 {
     public function registro(Request $request){
         
-        $usuario = new Usuario();
+        $user = new User();
 
-        $usuario->nombre = $request->nombre;
-        $usuario->email = $request->email;
-        $usuario->contrasena = Hash::make($request->contrasena);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
 
-        $usuario->save();
+        $user->save();
 
         return redirect(route('home'));
     }
@@ -26,16 +26,20 @@ class LoginController extends Controller
     public function login(Request $request){
 
         $credentials = [
-            "nombre" => $request->nombre,
-            "contrasena" => $request->contrasena,
+            "email" => $request->email,
+            "password" => $request->password,
         ];
         
         $remember = ($request->has('remember') ? true : false);
 
         if(Auth::attempt($credentials, $remember)){
 
+            $request->session()->regenerate();
+
+            return redirect()->intended(route('privado'));
+
         }else{
-            return redirect('login');
+            return redirect(route('login'));
         }
     }
 
@@ -45,6 +49,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect(route('login'));
+        return redirect(route('home'));
     }
 }

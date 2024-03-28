@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            UsuarioSeeder::class,
+            //UsuarioSeeder::class,
             SubastaSeeder::class,
             ProductoSeeder::class,
             HistorialSeeder::class,
@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         Subasta::factory(50)->create();
         Historial::factory(10)->create();
         Inventario::factory(50)->create();
-        Usuario::factory(50)->create();
+        //Usuario::factory(50)->create();
         Producto::factory(50)->create();
 
         User::factory()->create([
