@@ -11,15 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subastas', function (Blueprint $table) {
+        Schema::create('admin', function (Blueprint $table) {
             $table->id();
-
-            $table->string('nombre', 45);
-            $table->string('slug');
-            $table->integer('cantidad');
-            $table->integer('puja');
-            $table->integer('precio');
-            $table->dateTime('fecha_limite');
 
             $table->unsignedMediumInteger('user_id')->unique()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
@@ -33,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subastas');
+        Schema::dropIfExists('admin');
     }
 };
