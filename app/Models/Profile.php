@@ -12,8 +12,10 @@ class Profile extends Model
 
     
     public function user(){
-        $user = User::find($this->user_id);
-
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function productos(){
+        return $this->belongsToMany('App\Models\Producto');
     }
 }

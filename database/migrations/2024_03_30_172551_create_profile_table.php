@@ -11,12 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inventario', function (Blueprint $table) {
+        Schema::create('profile', function (Blueprint $table) {
             $table->id();
-            //$table->foreignId('id_usuario')->constrained('usuarios');
-            //$table->foreignId('id_producto')->constrained('productos');
             $table->integer('cantidad_producto');
             $table->integer('oro');
+
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('producto_id')->nullable();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('producto_id')->references('id')->on('productos')->onDelete('cascade')->onUpdate('cascade');
+
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inventario');
+        Schema::dropIfExists('profile');
     }
 };

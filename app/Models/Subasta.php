@@ -23,6 +23,17 @@ class Subasta extends Model
         return $this->belongsTo('App\Model\Producto');
     }
 
+    // protected static function boot(){
+
+    //     parent::boot();
+
+    //     static::saving(function ($subasta) {
+    //         if ($subasta->producto) {
+    //             $subasta->nombre = $subasta->producto->nombre;
+    //         }
+    //     });
+    // }
+
     public function getRouteKeyName()
     {
         return 'slug';

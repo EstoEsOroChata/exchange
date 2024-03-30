@@ -52,6 +52,10 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\Admin');
     }
     
+    public function profile(){
+        return $this->hasOne('App\Models\Profile');
+    }
+
     //Relación uno a muchos
     public function subastas(){
         return $this->hasMany('App\Models\Subasta');

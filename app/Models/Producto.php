@@ -12,4 +12,8 @@ class Producto extends Model
     public function subastas(){
         return $this->hasMany('App\Model\Subasta');
     }
+
+    public function profiles(){
+        return $this->belongsToMany('App\Models\Profile');
+    }
 }
