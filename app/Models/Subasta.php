@@ -14,6 +14,15 @@ class Subasta extends Model
 
     protected $guarded = [];
 
+    //Relación uno a muchos (inverso)
+    public function user(){
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function producto(){
+        return $this->belongsTo('App\Model\Producto');
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';

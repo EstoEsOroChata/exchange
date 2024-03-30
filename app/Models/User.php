@@ -6,7 +6,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models\Profile;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
@@ -48,10 +47,16 @@ class User extends Authenticatable
         ];
     }
 
-    public function profile(){
-        return $this->hasOne('App\Models\Profile');
+    //Relación uno a uno
+    public function admin(){
+        return $this->hasOne('App\Models\Admin');
     }
     
+    //Relación uno a muchos
+    public function subastas(){
+        return $this->hasMany('App\Models\Subasta');
+    }
+
 // Para guardar registros en minúscula y devolverlos con la primera letra en mayúscula
     protected function name(): Attribute
     {

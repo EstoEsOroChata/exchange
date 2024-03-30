@@ -21,8 +21,11 @@ return new class extends Migration
             $table->integer('precio');
             $table->dateTime('fecha_limite');
 
-            $table->unsignedMediumInteger('user_id')->unique()->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('producto_id')->nullable();
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('producto_id')->references('id')->on('productos')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();
         });

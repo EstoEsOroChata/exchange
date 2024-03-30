@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Inventario>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Admin>
  */
-class InventarioFactory extends Factory
+class AdminFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +17,7 @@ class InventarioFactory extends Factory
     public function definition(): array
     {
         return [
-            'cantidad_producto' => $this->faker->numberBetween($min = 1, $max = 100),
-            'oro' => $this->faker->numberBetween($min = 1, $max = 1000),
+            //
         ];
     }
 }

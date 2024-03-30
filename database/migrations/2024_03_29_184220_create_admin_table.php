@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admin', function (Blueprint $table) {
+        Schema::create('admins', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedMediumInteger('user_id')->unique()->nullable();
+            $table->unsignedMediumInteger('user_id')->unique();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-
-            $table->timestamps();
         });
     }
 

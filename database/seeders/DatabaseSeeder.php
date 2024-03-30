@@ -18,20 +18,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([
-            //UsuarioSeeder::class,
-            SubastaSeeder::class,
-            ProductoSeeder::class,
-            HistorialSeeder::class,
-            InventarioSeeder::class,
-        ]);
+        // $this->call([
+        //     ProductoSeeder::class,
+        //     SubastaSeeder::class, 
+        //     HistorialSeeder::class,
+        //     AdminSeeder::class,
+        // ]);
         
         User::factory(10)->create();
+        Producto::factory(50)->create();
         Subasta::factory(50)->create();
         Historial::factory(10)->create();
-        Inventario::factory(50)->create();
-        //Usuario::factory(50)->create();
-        Producto::factory(50)->create();
+        
 
         User::factory()->create([
             'name' => 'Test User',

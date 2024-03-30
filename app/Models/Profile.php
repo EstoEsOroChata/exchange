@@ -10,6 +10,7 @@ class Profile extends Model
 {
     use HasFactory;
 
+    
     public function user(){
         $user = User::find($this->user_id);
 

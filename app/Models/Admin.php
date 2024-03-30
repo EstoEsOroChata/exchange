@@ -5,8 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Inventario extends Model
+class Admin extends Model
 {
-    protected $table = 'inventario';
     use HasFactory;
+
+    
+    public function user(){
+
+        return $this->belongsTo('App\Models\User');
+    }
 }
