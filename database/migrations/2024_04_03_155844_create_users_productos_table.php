@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('historial', function (Blueprint $table) {
+        Schema::create('users_productos', function (Blueprint $table) {
             $table->id();
-            //$table->foreignId('id_usuario')->constrained('usuarios');
-            //$table->foreignId('id_producto')->constrained('productos');
-            //$table->foreignId('id_subasta')->constrained('subastas');
-            $table->dateTime('fecha_compra');
+
+            $table->integer('cantidad');
+
+            $table->foreignId('user_id')->constrained('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('producto_id')->constrained('id')->on('productos')->onDelete('cascade')->onUpdate('cascade');
+
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('historial');
+        Schema::dropIfExists('users_productos');
     }
 };

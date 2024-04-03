@@ -46,14 +46,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
-    //Relación uno a uno
-    public function admin(){
-        return $this->hasOne('App\Models\Admin');
-    }
     
-    public function profile(){
-        return $this->hasOne('App\Models\Profile');
+    public function usersProductos(){
+        return $this->belongsToMany('App\Models\UsersProductos');
     }
 
     //Relación uno a muchos

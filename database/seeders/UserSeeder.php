@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
         $user-> email = "i3sus.maggie@gmail.com";
         $user-> password = bcrypt('1234');
         $user-> es_admin = true;
+        $user-> oro = 1000;
         
         $user->save();
 
@@ -29,6 +30,7 @@ class UserSeeder extends Seeder
         $user2-> email = "celeste@gmail.com";
         $user2-> password = bcrypt('1234');
         $user2-> es_admin = false;
+        $user2-> oro = 1000;
         
         $user2->save();
     }

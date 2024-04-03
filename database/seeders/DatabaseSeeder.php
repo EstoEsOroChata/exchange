@@ -4,8 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Profile;
+use App\Models\Subasta;
 use App\Models\User;
+use App\Models\UsersProductos;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,14 +19,13 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ProductoSeeder::class,
             UserSeeder::class,
-            SubastaSeeder::class, 
-            ProfileSeeder::class,
-            AdminSeeder::class,
+            SubastaSeeder::class,
+            UsersProductosSeeder::class,
         ]);
         
-         Profile::factory(10)->create();
-        // Producto::factory(50)->create();
-        // Subasta::factory(50)->create();
+        
+        //UsersProductos::factory(10)->create();
+        UsersProductos::factory(10)->create();
         // Historial::factory(10)->create();
         
 

@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
+
             $table->string('name');
-            //$table->string('imagen');
+            $table->string('imagen')->nullable();
+
             $table->timestamps();
         });
     }

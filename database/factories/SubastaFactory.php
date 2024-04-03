@@ -17,7 +17,6 @@ class SubastaFactory extends Factory
     public function definition(): array
     {
         return [
-            'nombre' => $this->faker->word,
             'slug' => $this->faker->slug(),
             'cantidad' => $this->faker->numberBetween($min = 1, $max = 100), 
             'puja' => $this->faker->numberBetween($min = 1, $max = 100), 

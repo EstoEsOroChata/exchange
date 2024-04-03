@@ -13,7 +13,8 @@ class Producto extends Model
         return $this->hasMany('App\Model\Subasta');
     }
 
-    public function profiles(){
-        return $this->belongsToMany('App\Models\Profile');
+//Relación muchos a muchos
+    public function usersProductos(){
+        return $this->belongsToMany('App\Models\UsersProductos');
     }
 }
