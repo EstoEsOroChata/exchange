@@ -12,18 +12,18 @@
         font-weight: bold;
     }
 </style>
-
+@vite('resources/css/app.css')
 </head>
-<body>
-    <!-- header -->
-    <!-- nav -->
-    
-    @include('layouts.partials.header')
+    <body>
+        <!-- header -->
+        <!-- nav -->
 
-    @yield('content')
+        @include('layouts.partials.header')
 
-    @include('layouts.partials.footer')
+        @yield('content')
 
-    <!-- script -->
-</body>
+        @include('layouts.partials.footer')
+
+        <!-- script -->
+    </body>
 </html>

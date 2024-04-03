@@ -17,7 +17,7 @@ Route::get('contacto',[ContactoController::class, 'index'])->name('contacto.inde
 Route::post('contacto', [ContactoController::class, 'store'])->name('contacto.store');
 
 //Login
-Route::view('/login', 'login')->name('login');
+Route::view('/login', 'login')->name('iniciar-sesion');
 Route::view('/registro', 'registro')->name('registro');
 Route::view('/privado', 'secret')->middleware('auth')->name('privado');
 

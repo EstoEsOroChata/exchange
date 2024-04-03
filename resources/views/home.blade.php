@@ -3,5 +3,8 @@
 @section('title', 'Home')
 
 @section('content')
-<h1>Bienvenido a la página principal</h1>
+
+<a href="{{route('iniciar-sesion')}}">Iniciar sesión</a>
+<a href="{{route('registro')}}">Regístrate</a>
+
 @endsection
