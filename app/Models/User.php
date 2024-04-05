@@ -22,6 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'es_admin',
+        'oro',
     ];
 
     /**
@@ -49,6 +51,12 @@ class User extends Authenticatable
     
     public function usersProductos(){
         return $this->belongsToMany('App\Models\UsersProductos');
+    }
+
+    public function productos()
+    {
+        return $this->belongsToMany(Producto::class, 'users_productos', 'user_id', 'producto_id')
+            ->withPivot('cantidad');
     }
 
     //Relación uno a muchos

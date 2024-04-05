@@ -1,5 +1,10 @@
 <header>
     <h1>Exchange</h1>
+
+    <a href="{{ route('perfil') }}">
+        <button type="button">Mi perfil</button>
+    </a>
+    
     <nav>
         <ul>
             <li><a href="{{route('home')}}" class="{{request()->RouteIs('home') ? 'active' : ''}}">Home</a>
