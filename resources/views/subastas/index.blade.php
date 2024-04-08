@@ -11,7 +11,7 @@
         @foreach ($subastas as $subasta)
             <li>
                 <a href="{{route('subastas.show', $subasta)}}">
-                    {{$subasta->nombre}}
+                    {{$subasta->name}}
                 </a>
             </li>
         @endforeach

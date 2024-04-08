@@ -10,7 +10,7 @@ class Subasta extends Model
 {
     use HasFactory;
 
-    // protected $fillable = ['nombre', 'cantidad', 'puja', 'precio', 'fecha_limite'];
+    // protected $fillable = ['name', 'cantidad', 'puja', 'precio', 'fecha_limite'];
 
     protected $guarded = [];
 
@@ -20,19 +20,8 @@ class Subasta extends Model
     }
 
     public function producto(){
-        return $this->belongsTo('App\Model\Producto');
+        return $this->belongsTo('App\Models\Producto');
     }
-
-    // protected static function boot(){
-
-    //     parent::boot();
-
-    //     static::saving(function ($subasta) {
-    //         if ($subasta->producto) {
-    //             $subasta->nombre = $subasta->producto->nombre;
-    //         }
-    //     });
-    // }
 
     public function getRouteKeyName()
     {
@@ -43,7 +32,7 @@ class Subasta extends Model
         parent::boot();
 
         static::saving(function ($subasta) {
-            $subasta->slug = Str::slug($subasta->nombre);
+            $subasta->slug = Str::slug($subasta->name);
         });
     }
 }

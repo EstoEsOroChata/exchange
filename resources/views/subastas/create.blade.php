@@ -12,17 +12,18 @@
 
     <br>
     
-    <label>
-        Nombre:
-        <br>
-        <input type="text" name="nombre"  value="{{old('nombre')}}">
-    </label>
+    <select name="producto_id">
+        <option value="">Selecciona un producto</option>
+        @foreach ($productos as $producto)
+            <option value="{{$producto->id}}">{{$producto->name}}</option>
+        @endforeach
+    </select>
 
-    @error('nombre')
+    {{-- @error('name')
     <br>
         <span>{{$message}}</span>
         <br>
-    @enderror
+    @enderror --}}
 
     <br>
 

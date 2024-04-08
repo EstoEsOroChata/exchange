@@ -17,6 +17,15 @@ Route::get('contacto',[ContactoController::class, 'index'])->name('contacto.inde
 
 Route::post('contacto', [ContactoController::class, 'store'])->name('contacto.store');
 
+Route::get('/subastas/{subasta}', [SubastaController::class, 'show'])->name('subastas.show');
+
+Route::get('/subastas/{subasta}/edit', [SubastaController::class, 'edit'])->name('subastas.edit');
+
+Route::put('/subastas/{subasta}', [SubastaController::class, 'update'])->name('subastas.update');
+
+
+
+
 //Login
 Route::view('/login', 'login')->name('iniciar-sesion');
 Route::view('/registro', 'registro')->name('registro');

@@ -1,43 +1,14 @@
 @extends('layouts.plantilla')
 
-@section('title','Subastas edit')
+@section('title','Subasta de ' . $subasta->name)
 
 @section('content')
-    <h1>Aquí puedes editar una subasta</h1>
-    {{-- <a href="{{route('subastas.show')}}">Volver a subastas</a> --}}
+    <h1>Editando subasta de: {{$subasta->name}}</h1>
     <form action="{{route('subastas.update', $subasta)}}" method="POST">
 
     @csrf
     @method('put')
-
-    <label>
-        Nombre:
-        <br>
-        <input type="text" name="nombre" value="{{ old('nombre', $subasta->nombre)}}">
-    </label>
-
-    @error('nombre')
-    <br>
-        <span>{{$message}}</span>
-        <br>
-    @enderror
-
-    <br>
-
-    <label>
-        Cantidad:
-        <br>
-        <input type="text" name="cantidad" value="{{ old('cantidad', $subasta->cantidad)}}">
-    </label>
-
-    @error('cantidad')
-    <br>
-        <span>{{$message}}</span>
-        <br>
-    @enderror
-
-    <br>
-
+    
     <label>
         Puja:
         <br>

@@ -23,7 +23,7 @@ class StoreSubasta extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => 'required|min:3',
+            'name' => 'required|min:3',
             'cantidad' => 'required|numeric',
             'puja' => 'required|numeric',
             'precio' => 'required|numeric|gt:puja',
@@ -34,7 +34,7 @@ class StoreSubasta extends FormRequest
     public function messages()
     {
         return [
-            'nombre.required' => 'El nombre es obligatorio',
+            'name.required' => 'El nombre es obligatorio',
             'cantidad.required' => 'La cantidad es obligatoria',
             'puja.required' => 'La puja es obligatoria',
             'precio.gt' => 'El precio debe ser mayor que la puja.',

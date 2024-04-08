@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
 
             //$table->string('nombre', 45);
+            $table->string('name');
             $table->string('slug');
             $table->integer('cantidad');
             $table->integer('puja');
