@@ -87,6 +87,12 @@ class SubastaController extends Controller
             return redirect()->back()->with('error', 'Error al procesar la compra.');
         }
 
+        // Obtener el usuario creador de la subasta
+        $creadorSubasta = $subasta->user;
+
+        // Incrementar el oro del usuario creador de la subasta
+        $creadorSubasta->increment('oro', $subasta->precio);
+
         // Asociar el producto al usuario
         $producto = Producto::findOrFail($subasta->producto_id);
         $producto->users()->attach(auth()->id(), ['cantidad' => 1]); // Asociar al usuario y definir la cantidad
@@ -99,6 +105,7 @@ class SubastaController extends Controller
         return redirect()->route('subastas.show', $subasta)->with('error', 'No tienes suficiente oro para comprar este producto.');
     }
 }
+    
     
 
     public function destroy(Subasta $subasta){
