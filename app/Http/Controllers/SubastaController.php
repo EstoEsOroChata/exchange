@@ -6,6 +6,7 @@ use App\Http\Requests\StoreSubasta;
 use App\Models\Producto;
 use App\Models\Subasta;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class SubastaController extends Controller
 {
@@ -72,6 +73,33 @@ class SubastaController extends Controller
 
         return redirect()->route('subastas.show', $subasta);
     }
+
+    public function comprar(Subasta $subasta)
+{
+    // Verificar si el usuario está autenticado y tiene suficiente "oro" para comprar
+    if (auth()->check() && auth()->user()->oro >= $subasta->precio) {
+        // Reducir el "oro" del comprador
+        $user = auth()->user();
+        if ($user instanceof \App\Models\User) {
+            $user->decrement('oro', $subasta->precio);
+        } else {
+            // Manejar el caso en que $user no sea una instancia de User
+            return redirect()->back()->with('error', 'Error al procesar la compra.');
+        }
+
+        // Asociar el producto al usuario
+        $producto = Producto::findOrFail($subasta->producto_id);
+        $producto->users()->attach(auth()->id(), ['cantidad' => 1]); // Asociar al usuario y definir la cantidad
+
+        // Eliminar la subasta
+        $subasta->delete();
+
+        return redirect()->route('subastas.index')->with('success', 'Compra realizada con éxito.');
+    } else {
+        return redirect()->route('subastas.show', $subasta)->with('error', 'No tienes suficiente oro para comprar este producto.');
+    }
+}
+    
 
     public function destroy(Subasta $subasta){
 

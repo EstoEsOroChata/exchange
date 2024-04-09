@@ -23,6 +23,7 @@ Route::get('/subastas/{subasta}/edit', [SubastaController::class, 'edit'])->name
 
 Route::put('/subastas/{subasta}', [SubastaController::class, 'update'])->name('subastas.update');
 
+Route::post('/subastas/{subasta}/comprar', [SubastaController::class, 'comprar'])->name('subastas.comprar');
 
 
 

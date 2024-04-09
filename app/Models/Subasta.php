@@ -31,8 +31,9 @@ class Subasta extends Model
     protected static function boot(){
         parent::boot();
 
-        static::saving(function ($subasta) {
-            $subasta->slug = Str::slug($subasta->name);
+        static::creating(function ($subasta) {
+            // Generar el slug con el ID
+            $subasta->slug = Str::slug($subasta->name . '-' . uniqid());
         });
     }
 }
