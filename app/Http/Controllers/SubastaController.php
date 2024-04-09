@@ -7,6 +7,7 @@ use App\Models\Producto;
 use App\Models\Subasta;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UsersProductos;
 
 class SubastaController extends Controller
 {
@@ -41,6 +42,14 @@ class SubastaController extends Controller
         $subasta->producto_id = $request->producto_id;
     
         $subasta->save();
+    
+        // Restar la cantidad del producto al usuario
+        $userProducto = UsersProductos::where('user_id', auth()->id())
+                                    ->where('producto_id', $request->producto_id)
+                                    ->firstOrFail();
+    
+        $userProducto->cantidad -= $request->cantidad;
+        $userProducto->save();
     
         return redirect()->route('subastas.show', $subasta);
     }
@@ -108,10 +117,19 @@ class SubastaController extends Controller
     
     
 
-    public function destroy(Subasta $subasta){
+public function destroy(Subasta $subasta){
+    // Obtener la entrada correspondiente en la tabla pivote "users_productos"
+    $userProducto = UsersProductos::where('user_id', $subasta->user_id)
+                                ->where('producto_id', $subasta->producto_id)
+                                ->firstOrFail();
 
-            $subasta->delete();
+    // Devolver la cantidad de producto eliminada al usuario
+    $userProducto->cantidad += $subasta->cantidad;
+    $userProducto->save();
 
-            return redirect()->route('subastas.index');
-    }
+    // Eliminar la subasta
+    $subasta->delete();
+
+    return redirect()->route('subastas.index');
+}
 }
