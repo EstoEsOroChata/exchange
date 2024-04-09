@@ -104,7 +104,8 @@ class SubastaController extends Controller
 
         // Asociar el producto al usuario
         $producto = Producto::findOrFail($subasta->producto_id);
-        $producto->users()->attach(auth()->id(), ['cantidad' => 1]); // Asociar al usuario y definir la cantidad
+        $producto->users()->attach(auth()->id(), ['cantidad' => $subasta->cantidad]); // Asociar al usuario y definir la cantidad
+
 
         // Eliminar la subasta
         $subasta->delete();
