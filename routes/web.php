@@ -25,6 +25,9 @@ Route::put('/subastas/{subasta}', [SubastaController::class, 'update'])->name('s
 
 Route::post('/subastas/{subasta}/comprar', [SubastaController::class, 'comprar'])->name('subastas.comprar');
 
+Route::post('/subastas/{subasta}/pujar', [SubastaController::class, 'pujar'])->name('subastas.pujar');
+
+
 
 
 //Login

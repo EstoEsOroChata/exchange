@@ -20,6 +20,19 @@
     <br>
 
     @if(auth()->check() && auth()->id() !== $subasta->user_id)
+    <form action="{{ route('subastas.pujar', $subasta) }}" method="POST">
+        @csrf
+        <div class="form-group">
+            <label for="puja">Realizar puja:</label>
+            <input type="number" id="puja" name="puja" min="{{$subasta->puja + 1}}" value="{{$subasta->puja + 1}}" required>
+            <button type="submit">Pujar</button>
+        </div>
+    </form>
+@endif
+
+    <br>
+
+    @if(auth()->check() && auth()->id() !== $subasta->user_id)
     <form action="{{ route('subastas.comprar', $subasta) }}" method="POST">
         @csrf
         <button type="submit">Comprar por {{ $subasta->precio }} oros</button>

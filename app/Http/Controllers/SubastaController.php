@@ -26,14 +26,13 @@ class SubastaController extends Controller
 
     public function store(Request $request){
         
-        // Obtener el nombre del producto seleccionado
+        //El nombre del producto
         $producto = Producto::findOrFail($request->producto_id);
         $nombreProducto = $producto->name;
     
-        // Crear la subasta
         $subasta = new Subasta();
     
-        $subasta->name = $nombreProducto; // Asignar el nombre del producto a la subasta
+        $subasta->name = $nombreProducto; //Aquí le pongo el nombre que saque antes
         $subasta->cantidad = $request->cantidad;
         $subasta->puja = $request->puja;
         $subasta->precio = $request->precio;
@@ -43,10 +42,8 @@ class SubastaController extends Controller
     
         $subasta->save();
     
-        // Restar la cantidad del producto al usuario
-        $userProducto = UsersProductos::where('user_id', auth()->id())
-                                    ->where('producto_id', $request->producto_id)
-                                    ->firstOrFail();
+        //Quitar la cantidad de producto al creador de la subasta
+        $userProducto = UsersProductos::where('user_id', auth()->id())->where('producto_id', $request->producto_id)->firstOrFail();
     
         $userProducto->cantidad -= $request->cantidad;
         $userProducto->save();
@@ -83,31 +80,63 @@ class SubastaController extends Controller
         return redirect()->route('subastas.show', $subasta);
     }
 
+
+    public function pujar(Subasta $subasta, Request $request)
+{
+    //Validaciones
+    $request->validate([
+        'puja' => 'required|numeric|min:0',
+    ]);
+
+    // Verificar si la fecha límite de la subasta ha pasado
+    if ($subasta->fecha_limite < now()) {
+        return redirect()->back()->with('error', 'La fecha límite de la subasta ha pasado.');
+    }
+
+    // Obtener el usuario actual
+    $user = auth()->user();
+
+    // Verificar si el usuario tiene suficiente oro para realizar la puja
+    if ($user->oro < $request->puja) {
+        return redirect()->back()->with('error', 'No tienes suficiente oro para realizar esta puja.');
+    }
+
+    // Restar el oro del usuario
+    if ($user instanceof \App\Models\User) {
+        $user->decrement('oro', $request->puja);
+    } else {
+        return redirect()->back()->with('error', 'Error al procesar la compra.');
+    }
+
+    // Actualizar la puja en la subasta
+    $subasta->puja = $request->puja;
+    $subasta->save();
+
+    return redirect()->back()->with('success', 'Puja realizada con éxito.');
+}
+
     public function comprar(Subasta $subasta)
 {
-    // Verificar si el usuario está autenticado y tiene suficiente "oro" para comprar
+    //Para comprobar si el usuario esta logeado y tiene oro
     if (auth()->check() && auth()->user()->oro >= $subasta->precio) {
-        // Reducir el "oro" del comprador
+        //Le baja el oro
         $user = auth()->user();
         if ($user instanceof \App\Models\User) {
             $user->decrement('oro', $subasta->precio);
         } else {
-            // Manejar el caso en que $user no sea una instancia de User
             return redirect()->back()->with('error', 'Error al procesar la compra.');
         }
 
-        // Obtener el usuario creador de la subasta
+        //Usuario que crea la subasta
         $creadorSubasta = $subasta->user;
 
-        // Incrementar el oro del usuario creador de la subasta
+        //Le da el oro al creador de la subasta
         $creadorSubasta->increment('oro', $subasta->precio);
 
-        // Asociar el producto al usuario
+        //Le da los productos al comprador
         $producto = Producto::findOrFail($subasta->producto_id);
-        $producto->users()->attach(auth()->id(), ['cantidad' => $subasta->cantidad]); // Asociar al usuario y definir la cantidad
+        $producto->users()->attach(auth()->id(), ['cantidad' => $subasta->cantidad]);
 
-
-        // Eliminar la subasta
         $subasta->delete();
 
         return redirect()->route('subastas.index')->with('success', 'Compra realizada con éxito.');
@@ -119,16 +148,25 @@ class SubastaController extends Controller
     
 
 public function destroy(Subasta $subasta){
-    // Obtener la entrada correspondiente en la tabla pivote "users_productos"
-    $userProducto = UsersProductos::where('user_id', $subasta->user_id)
-                                ->where('producto_id', $subasta->producto_id)
-                                ->firstOrFail();
+    // Verifica si hay una puja y el pujador existe
+    if ($subasta->puja > 0) {
+        $pujador = User::find($subasta->user_id);
+        if ($pujador) {
+            // Incrementa el oro del pujador
+            $pujador->increment('oro', $subasta->puja);
+        }
+    }
 
-    // Devolver la cantidad de producto eliminada al usuario
+    // Relaciona el producto con el usuario
+    $userProducto = UsersProductos::where('user_id', $subasta->user_id)
+                                    ->where('producto_id', $subasta->producto_id)
+                                    ->firstOrFail();
+
+    // Devuelve los productos al usuario
     $userProducto->cantidad += $subasta->cantidad;
     $userProducto->save();
 
-    // Eliminar la subasta
+    // Elimina la subasta
     $subasta->delete();
 
     return redirect()->route('subastas.index');
