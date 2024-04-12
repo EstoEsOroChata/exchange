@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Página privada @auth de {{Auth::user()->name}} @endauth </title>
+    <title>Perfil @auth de {{Auth::user()->name}} @endauth </title>
 </head>
 <body>
-    <h1>Página privada @auth de {{ Auth::user()->name }} @endauth </h1>
+    <h1>Perfil @auth de {{ Auth::user()->name }} @endauth </h1>
     <a href="{{ route('logout') }}">
         <button type="button">Desconectar</button>
     </a>
@@ -64,7 +64,7 @@
     @if ($subastas->count() > 0)
         <ul>
             @foreach ($subastas as $subasta)
-                <li><a href="{{ route('perfil.subastas', $subasta) }}">{{ $subasta->name }}</a></li>
+                <li><a href="{{ route('subastas.show', $subasta) }}">{{ $subasta->name }}</a></li>
             @endforeach
         </ul>
     @else

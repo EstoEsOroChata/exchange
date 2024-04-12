@@ -40,5 +40,5 @@ Route::post('/iniciar-sesion',[LoginController::class,'login'])->name('login');
 Route::get('/cerrar-sesion',[LoginController::class,'logout'])->name('logout');
 
 Route::get('/perfil', [InventarioController::class, 'show'])->middleware('auth')->name('perfil.show');
-Route::get('/perfil/subastas', [InventarioController::class, 'subastasUsuario'])->name('perfil.subastas');
+//Route::get('/perfil/subastas', [InventarioController::class, 'subastasUsuario'])->name('perfil.subastas');
 
