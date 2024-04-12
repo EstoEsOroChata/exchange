@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('slug');
             $table->integer('cantidad');
             $table->integer('puja');
+            $table->unsignedBigInteger('pujador_id')->nullable();
             $table->integer('precio');
             $table->dateTime('fecha_limite');
 

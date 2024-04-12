@@ -34,7 +34,7 @@
                 $productos_agrupados = [];
             @endphp
 
-            @foreach ($user->productos as $producto)
+            @foreach ($usuario->productos as $producto)
                 @php
                     $nombre = $producto->name;
                     $cantidad = $producto->pivot->cantidad;
@@ -59,5 +59,17 @@
             @endforeach
         </tbody>
     </table>
+
+    <h2>Tus subastas:</h2>
+    @if ($subastas->count() > 0)
+        <ul>
+            @foreach ($subastas as $subasta)
+                <li><a href="{{ route('perfil.subastas', $subasta) }}">{{ $subasta->name }}</a></li>
+            @endforeach
+        </ul>
+    @else
+        <p>No tienes subastas activas en este momento.</p>
+    @endif
+
     </body>
 </html>

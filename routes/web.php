@@ -27,16 +27,18 @@ Route::post('/subastas/{subasta}/comprar', [SubastaController::class, 'comprar']
 
 Route::post('/subastas/{subasta}/pujar', [SubastaController::class, 'pujar'])->name('subastas.pujar');
 
-
+Route::post('/subastas/{subasta}/finalizar', [SubastaController::class, 'finalizarSubasta'])->name('subastas.finalizar');
 
 
 //Login
 Route::view('/login', 'login')->name('iniciar-sesion');
 Route::view('/registro', 'registro')->name('registro');
-Route::view('/perfil', 'secret')->middleware('auth')->name('perfil');
+//Route::view('/perfil', 'secret')->middleware('auth')->name('perfil');
 
 Route::post('/validar-registro',[LoginController::class,'registro'])->name('validar');
 Route::post('/iniciar-sesion',[LoginController::class,'login'])->name('login');
 Route::get('/cerrar-sesion',[LoginController::class,'logout'])->name('logout');
 
-Route::get('/perfil', [InventarioController::class, 'show'])->name('perfil');
+Route::get('/perfil', [InventarioController::class, 'show'])->middleware('auth')->name('perfil.show');
+Route::get('/perfil/subastas', [InventarioController::class, 'subastasUsuario'])->name('perfil.subastas');
+

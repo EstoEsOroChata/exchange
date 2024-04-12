@@ -1,7 +1,7 @@
 <header>
     <h1>Exchange</h1>
 
-    <a href="{{ route('perfil') }}">
+    <a href="{{ route('perfil.show') }}">
         <button type="button">Mi perfil</button>
     </a>
     

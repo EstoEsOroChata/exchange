@@ -24,7 +24,7 @@ class StoreSubasta extends FormRequest
     {
         return [
             'name' => 'required|min:3',
-            'cantidad' => 'required|numeric',
+            'cantidad' => 'required|numeric|gt:0',
             'puja' => 'required|numeric',
             'precio' => 'required|numeric|gt:puja',
             'fecha_limite' => 'required'

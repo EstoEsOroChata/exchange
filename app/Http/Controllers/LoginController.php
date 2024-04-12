@@ -36,7 +36,7 @@ class LoginController extends Controller
 
             $request->session()->regenerate();
 
-            return redirect()->intended(route('perfil'));
+            return redirect()->intended(route('perfil.show'));
 
         }else{
             return redirect(route('login'));

@@ -70,9 +70,13 @@
     <br>
 
     <label>
-        Fecha límite:
+        Duración de la subasta:
         <br>
-        <input type="datetime-local" name="fecha_limite" value="{{old('fecha_limite')}}">
+        <select name="duracion_subasta">
+            <option value="12">12 horas</option>
+            <option value="24">24 horas</option>
+            <option value="48">48 horas</option>
+        </select>
     </label>
 
 

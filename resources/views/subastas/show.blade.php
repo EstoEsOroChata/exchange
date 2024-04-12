@@ -39,6 +39,13 @@
     </form>
 @endif
 
+@if(auth()->user()->id === $subasta->user_id)
+    <form action="{{ route('subastas.finalizar', $subasta) }}" method="POST">
+        @csrf
+        <button type="submit">Finalizar Subasta</button>
+    </form>
+@endif
+
     {{-- Meto el botón de eliminar dentro de un formulario para que me use el método delete de "SubastaController.php" si no, por defecto, me usa el método "get". --}}
     <form action="{{route('subastas.destroy', $subasta)}}" method="POST">
         @csrf
