@@ -36,7 +36,7 @@ class LoginController extends Controller
 
             $request->session()->regenerate();
 
-            return redirect()->intended(route('perfil.show'));
+            return redirect()->intended(route('perfil.show', ['name' => Auth::user()->name]));
 
         }else{
             return redirect(route('login'));
