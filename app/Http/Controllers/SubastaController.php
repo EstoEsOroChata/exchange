@@ -26,7 +26,12 @@ class SubastaController extends Controller
     }
 
     public function store(Request $request){
-        //dd($request->all());
+        
+        $userProducto = UsersProductos::where('user_id', auth()->id())->where('producto_id', $request->producto_id)->firstOrFail();
+        if ($userProducto->cantidad < $request->cantidad) {
+            return redirect()->back()->with('error', 'No tienes suficiente cantidad para crear la subasta');
+        }
+
         $request->validate([
             'cantidad' => 'required|numeric|gt:0',
             'puja' => 'required|numeric',

@@ -1,7 +1,7 @@
 <header>
     <h1>Exchange</h1>
 @auth
-    <a href="{{ route('perfil.show', ['name' => Auth::user()->name])}}">
+    <a href="{{ route('perfil.show', ['id' => Auth::user()->id])}}">
         <button type="button">Mi perfil</button>
     </a>
 @endauth

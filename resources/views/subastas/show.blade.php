@@ -4,7 +4,7 @@
 
 @section('content')
     <h1>Subasta de: {{$subasta->name}}</h1>
-
+    
 @if(auth()->check() && auth()->id() === $subasta->user_id)
     <a href="{{ route('subastas.edit', $subasta) }}">Editar subasta</a>
 @endif
@@ -16,6 +16,7 @@
     <p><strong>Puja actual: </strong>{{$subasta->puja}}</p>
     <p><strong>Precio de compra: </strong>{{$subasta->precio}}</p>
     <p><strong>Fecha límite: </strong>{{$subasta->fecha_limite}}</p>
+    <p>Creador de la subasta: <a href="{{ route('perfil.show', $subasta->user->id) }}">{{ $subasta->user->name }}</a></p>
 
     <br>
 

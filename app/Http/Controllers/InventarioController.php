@@ -3,24 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subasta;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class InventarioController extends Controller
 {
-    public function show(){
-        $user = auth()->user();
-        return $this->subastasUsuario(); // Llama directamente al método que obtiene las subastas
+    public function show($id){
+        $usuario = User::findOrFail($id); // Buscar el usuario por su ID
+        return $this->subastasUsuario($usuario); // Pasar el usuario al método subastasUsuario
     }
-
-    public function subastasUsuario()
+    
+    public function subastasUsuario($usuario)
     {
-        // Obtener el usuario actual
-        $usuario = auth()->user();
-    
-        // Obtener las subastas creadas por el usuario actual
+        // Obtener las subastas creadas por el usuario proporcionado
         $subastas = Subasta::where('user_id', $usuario->id)->get();
-    
-        // Pasar las subastas a la vista del perfil del usuario
+        
+        // Pasar las subastas y el usuario a la vista del perfil del usuario
         return view('profile', compact('usuario', 'subastas'));
     }
 }

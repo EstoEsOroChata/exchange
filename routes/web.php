@@ -39,6 +39,6 @@ Route::post('/validar-registro',[LoginController::class,'registro'])->name('vali
 Route::post('/iniciar-sesion',[LoginController::class,'login'])->name('login');
 Route::get('/cerrar-sesion',[LoginController::class,'logout'])->name('logout');
 
-Route::get('/perfil/{name}', [InventarioController::class, 'show'])->middleware('auth')->name('perfil.show');
+Route::get('/perfil/{id}', [InventarioController::class, 'show'])->middleware('auth')->name('perfil.show');
 //Route::get('/perfil/subastas', [InventarioController::class, 'subastasUsuario'])->name('perfil.subastas');
 
