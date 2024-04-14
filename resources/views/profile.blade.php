@@ -26,7 +26,9 @@
 
     @if(Auth::user()->id == $usuario->id)
     <h2>Tu inventario:</h2>
-
+    @if($usuario->productos->isEmpty())
+    <p>Tu inventario está vacío en este momento.</p>
+    @else
     <table>
         <tr>
             <th>Nombre</th>
@@ -66,7 +68,7 @@
         </tbody>
     </table>
     @endif
-    
+@endif   
     @if (Auth::user()->id == $usuario->id)
         <h2>Tus subastas:</h2>
         @else
