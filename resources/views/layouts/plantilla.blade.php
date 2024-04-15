@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
     <!-- favicon -->
-    <!-- estilos -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <style>
     .active{
         color: red;
@@ -15,15 +15,15 @@
 @vite('resources/css/app.css')
 </head>
     <body>
-        <!-- header -->
-        <!-- nav -->
-
-        @include('layouts.partials.header')
+<div class="container">
+        {{-- @include('layouts.partials.header') --}}
 
         @yield('content')
 
-        @include('layouts.partials.footer')
+        {{-- @include('layouts.partials.footer') --}}
 
-        <!-- script -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </div>
+  </body>
     </body>
 </html>
