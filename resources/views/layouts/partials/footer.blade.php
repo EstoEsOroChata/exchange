@@ -1,1 +1,1 @@
-<footer>Pie de página</footer>
+<footer>Todos los derechos reservados</footer>

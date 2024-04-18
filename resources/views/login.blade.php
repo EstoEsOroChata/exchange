@@ -10,7 +10,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alata&family=Comfortaa:wght@300..700&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
 
 </head>
 <body>
@@ -23,36 +24,34 @@
                     </a>
                 </div>
                 <div class="d-flex justify-content-center align-items-center" style="height: 90vh;">
-                    
-                        <div style="background-color: rgba(255, 255, 255, 0.5); border-radius: 20px;">
-                            <form method="POST" action="{{route('login')}}" class="p-4">
-                                <h1 class="display-4" style="font-family: 'Libre Franklin';font-weight: bold;">Iniciar sesión</h1>
-                                @csrf
-                                <div class="mb-3">
-                                    <label class="form-label w-100">
-                                        <h4>Email:</h4>
-                                        <input placeholder="Ingrese su correo electrónico" class="form-control w-100" type="email" name="email">
-                                    </label>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label w-100">
-                                        <h4>Contraseña:</h4>
-                                        <input class="form-control" type="password" name="password">
-                                    </label>
-                                </div>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" name="recordar">
-                                    <label class="form-check-label"><h5>Mantener sesión iniciada</h5></label>
-                                </div>
-                                <div class="mb-3">
-                                    <h6>¿No tienes cuenta?<a href="{{route('registro')}}"> Regístrate</h6></a>
-                                </div>
-                                <div>
-                                    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-                                </div>
-                            </form> 
-                        </div>
-                    
+                    <div style="background-color: rgba(255, 255, 255, 0.5); border-radius: 20px;">
+                        <form method="POST" action="{{route('login')}}" class="p-4">
+                            <h1 class="display-4" style="font-family: 'Poppins';font-weight: bold;">Iniciar sesión</h1>
+                            @csrf
+                            <div class="mb-3">
+                                <label class="form-label w-100">
+                                    <h4 style="font-family: 'Poppins';">Email:</h4>
+                                    <input placeholder="Ingrese su correo electrónico" class="form-control w-100" type="email" name="email" style="font-family: 'Poppins';">
+                                </label>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label w-100">
+                                    <h4 style="font-family: 'Poppins';">Contraseña:</h4>
+                                    <input class="form-control" type="password" name="password">
+                                </label>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" name="recordar">
+                                <label class="form-check-label"><h6 style="font-family: 'Poppins';">Mantener sesión iniciada</h6></label>
+                            </div>
+                            <div class="mb-3">
+                                <h6 style="font-family: 'Poppins';">¿No tienes cuenta?<a href="{{route('registro')}}"> Regístrate</h6></a>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary" style="font-family: 'Poppins';">Iniciar sesión</button>
+                            </div>
+                        </form> 
+                    </div>
                 </div>
             </div>
         </div>
