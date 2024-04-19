@@ -16,7 +16,7 @@
 
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid" style="font-family: 'Poppins';">
         <div class="row">
             <div class="bg-image" style="background-image: url('https://i.gyazo.com/a87b7ca685d14403197eb7382f5e0ec2.jpg'); background-repeat: no-repeat; background-size: cover; height: 100vh"> 
 
@@ -46,10 +46,10 @@
                 
                 <div class="d-flex justify-content-center align-items-start" style="padding-top: 10px;">
                     <div style="background-color: rgba(255, 255, 255, 0.5); border-radius: 20px; padding: 15px;">
-                        <h1 class="display-5 text-center mb-4" style="font-family: 'Poppins'; font-weight: bold;">Subastas activas</h1>
+                        <h1 class="display-5 text-center mb-4" style="font-weight: bold;">Subastas activas</h1>
                         <ul class="list-group">
                             @foreach ($subastas as $subasta)
-                                <li class="list-group-item list-group-item-action text-center" style="font-family: 'Poppins';">
+                                <li class="list-group-item list-group-item-action text-center">
                                     <a href="{{ route('subastas.show', $subasta) }}">
                                         {{ $subasta->name }}
                                     </a>

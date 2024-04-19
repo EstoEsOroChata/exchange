@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid" style="font-family: 'Poppins';">
         <div class="row">
             <div class="bg-image" style="background-image: url('https://i.gyazo.com/a87b7ca685d14403197eb7382f5e0ec2.jpg'); background-repeat: no-repeat; background-size: cover; height: 100vh"> 
                 <!-- Navbar -->
@@ -43,8 +43,8 @@
                 <!-- Content -->
                 <div class="d-flex justify-content-center align-items-start" style="padding-top: 10px;">
                     <div style="background-color: rgba(255, 255, 255, 0.5); border-radius: 20px; padding: 15px;">
-                        <h1 class="display-5 text-center mb-4" style="font-family: 'Poppins'; font-weight: bold;">Subasta de: {{$subasta->name}}</h1>
-                        <div style="font-family: 'Poppins'; font-size: 20px;">
+                        <h1 class="display-5 text-center mb-4" style="font-weight: bold;">Subasta de: {{$subasta->name}}</h1>
+                        <div style="font-size: 20px;">
                             <p><strong>Cantidad disponible: </strong>{{$subasta->cantidad}}</p>
                             <p><strong>Puja actual: </strong>{{$subasta->puja}}</p>
                             <p><strong>Precio de compra: </strong>{{$subasta->precio}}</p>
@@ -54,7 +54,7 @@
                         @if(auth()->check() && auth()->id() !== $subasta->user_id)
                             <form action="{{ route('subastas.pujar', $subasta) }}" method="POST">
                                 @csrf
-                                <div style="font-family: 'Poppins'; font-size: 20px;" class="form-group">
+                                <div style="font-size: 20px;" class="form-group">
                                     <label for="puja">Realizar puja:</label>
                                     <input type="number" id="puja" name="puja" min="{{$subasta->puja + 1}}" value="{{$subasta->puja + 1}}" class="form-control" required>
                                     <div style="padding-top: 10px;">
@@ -63,7 +63,7 @@
                                 </div>
                             </form>
                         @endif
-                        <div style="padding-top: 10px; font-family: 'Poppins';">
+                        <div style="padding-top: 10px;">
                         @if(auth()->check() && auth()->id() !== $subasta->user_id)
                             <form action="{{ route('subastas.comprar', $subasta) }}" method="POST">
                                 @csrf
@@ -73,12 +73,12 @@
                         </div>
                         <div style="display: flex; gap: 10px; align-items: center;">
                         @if(auth()->check() && auth()->id() === $subasta->user_id)
-                        <a style="font-family: 'Poppins';" class="btn btn-warning" href="{{ route('subastas.edit', $subasta) }}">Editar subasta</a>
+                        <a class="btn btn-warning" href="{{ route('subastas.edit', $subasta) }}">Editar subasta</a>
                         @endif
                         @if(auth()->user()->id === $subasta->user_id)
                             <form action="{{ route('subastas.finalizar', $subasta) }}" method="POST">
                                 @csrf
-                                <button style="font-family: 'Poppins';" class="btn btn-success" type="submit">Finalizar Subasta</button>
+                                <button class="btn btn-success" type="submit">Finalizar Subasta</button>
                             </form>
                         @endif
                         <!-- Eliminar Subasta -->
@@ -86,7 +86,7 @@
                         <form action="{{route('subastas.destroy', $subasta)}}" method="POST">
                             @csrf
                             @method('delete')
-                            <button style="font-family: 'Poppins';" class="btn btn-danger" type="submit">Eliminar subasta</button>
+                            <button class="btn btn-danger" type="submit">Eliminar subasta</button>
                         </form>
                         @endif
                         </div>

@@ -14,7 +14,7 @@
     
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid" style="font-family: 'Poppins';">
         <div class="row">
             <div class="bg-image" style="background-image: url('https://i.gyazo.com/a87b7ca685d14403197eb7382f5e0ec2.jpg'); background-repeat: no-repeat; background-size: cover; height: 100vh"> 
 
@@ -49,7 +49,7 @@
                     @csrf
 
                     <div style="padding-top: 15px;">
-                        <h2 style="font-family: 'Poppins';">Crear subasta</h2>
+                        <h2>Crear subasta</h2>
                     <select class="form-select mb-3" name="producto_id" required>
                         <option selected disabled value="">Selecciona un producto</option>
                         @foreach ($productos as $producto)

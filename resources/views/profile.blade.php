@@ -17,7 +17,7 @@
 </head>
 <body>
 
-    <div class="container-fluid">
+    <div class="container-fluid" style="font-family: 'Poppins';">
         <div class="row">
             <div class="bg-image" style="background-image: url('https://i.gyazo.com/a87b7ca685d14403197eb7382f5e0ec2.jpg'); background-repeat: no-repeat; background-size: cover; height: 100vh"> 
 
@@ -48,28 +48,28 @@
                     </ul>
                 </nav>
 
-                <div class="d-flex justify-content-start align-items-center" style="padding-top: 15px;">
+                <div class="d-flex justify-content-center align-items-center" style="padding-top: 15px;">
                 <div class="" style="background-color: rgba(255, 255, 255, 0.5); border-radius: 20px; padding-left: 15px; padding-right: 15px; padding-top: 5px;">
-                    <h1 class="display-5" style="font-family: 'Poppins';font-weight: bold;">Perfil de {{$usuario->name}} </h1>
+                    <h1 class="display-5" style="font-weight: bold;">Perfil de {{$usuario->name}} </h1>
                      <div style="padding-bottom: 15px; padding-top: 15px;">
                     @if(Auth::user()->id == $usuario->id)
-                    <h2 style="font-family: 'Poppins';">Dinero: {{Auth::user()->oro}} <img src="https://i.gyazo.com/7119885b63b3be6949d26f8b92255a31.png" alt="oro" width="30" height="30" style="border-radius: 5px;"></h2>
+                    <h2>Dinero: {{Auth::user()->oro}} <img src="https://i.gyazo.com/7119885b63b3be6949d26f8b92255a31.png" alt="oro" width="30" height="30" style="border-radius: 5px;"></h2>
                     @endif
                 </div>
                 <div style="padding-bottom: 15px; padding-top: 15px;">
                     @if(Auth::user()->id == $usuario->id)
-                    <h2 style="font-family: 'Poppins';">Tu inventario:</h2>
+                    <h2>Tu inventario:</h2>
                     @if($usuario->productos->isEmpty())
-                    <p style="font-family: 'Poppins';">Tu inventario está vacío en este momento.</p>
+                    <p>Tu inventario está vacío en este momento.</p>
                     @else
                     <table class="table table-hover table-bordered text-center">
                     <thead  class="table-warning align-middle">
                         <tr>
-                            <th style="font-family: 'Poppins';">Objeto</th>
-                            <th style="font-family: 'Poppins';">Cantidad</th>
+                            <th>Objeto</th>
+                            <th>Cantidad</th>
                         </tr>
                     </thead>
-                        <tbody style="font-family: 'Poppins';">
+                        <tbody>
                             @php
                                 $productos_agrupados = [];
                             @endphp
@@ -106,19 +106,19 @@
             </div>
                     @if (Auth::user()->id == $usuario->id)
                     <div style="padding-bottom: 15px;">
-                        <h2 style="font-family: 'Poppins';">Tus subastas:</h2>
+                        <h2>Tus subastas:</h2>
                         @else
-                            <h2 style="font-family: 'Poppins';">Subastas de {{$usuario->name}}</h2>
+                            <h2>Subastas de {{$usuario->name}}</h2>
                         @endif
                 
                         @if ($subastas->count() > 0)
                             <ul class="list-group">
                              @foreach ($subastas as $subasta)
-                                  <li style="font-family: 'Poppins';"><a href="{{ route('subastas.show', $subasta) }}" class="list-group-item list-group-item-action">{{ $subasta->name }}</a></li>
+                                  <a href="{{ route('subastas.show', $subasta) }}" class="list-group-item list-group-item-action">{{ $subasta->name }}</a>
                              @endforeach
                          </ul>
                      @else
-                         <p style="font-family: 'Poppins';">No tienes subastas activas en este momento.</p>
+                         <p>No tienes subastas activas en este momento.</p>
                      @endif
                     </div>
                 </div>

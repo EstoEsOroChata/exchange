@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid" style="font-family: 'Poppins';">
         <div class="row">
             <div class="bg-image" style="background-image: url('https://i.gyazo.com/a87b7ca685d14403197eb7382f5e0ec2.jpg'); background-repeat: no-repeat; background-size: cover; height: 100vh"> 
                 <!-- Navbar -->
@@ -44,7 +44,7 @@
                 <!-- Content -->
                 <div class="d-flex justify-content-center align-items-start" style="padding-top: 10px;">
                     <div style="background-color: rgba(255, 255, 255, 0.5); border-radius: 20px; padding: 15px;">
-                        <h1 class="display-5 text-center mb-4" style="font-family: 'Poppins'; font-weight: bold;">Editando subasta de: {{$subasta->name}}</h1>
+                        <h1 class="display-5 text-center mb-4" style="font-weight: bold;">Editando subasta de: {{$subasta->name}}</h1>
                         <div>
                             <form action="{{route('subastas.update', $subasta)}}" method="POST">
                         

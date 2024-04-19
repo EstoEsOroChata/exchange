@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid" style="font-family: 'Poppins';">
         <div class="row">
             <div class="bg-image" style="background-image: url('https://i.gyazo.com/a87b7ca685d14403197eb7382f5e0ec2.jpg'); background-repeat: no-repeat; background-size: cover; height: 100vh">   
                 <div style="padding-top: 10px;">
@@ -23,28 +23,28 @@
                 <div class="d-flex justify-content-center align-items-center" style="height: 90vh;">
                     <div style="background-color: rgba(255, 255, 255, 0.5); border-radius: 20px;">
                         <form method="POST" action="{{route('validar')}}" class="p-4">
-                            <h1 class="display-4" style="font-family: 'Poppins';font-weight: bold;">Registrarse</h1>
+                            <h1 class="display-4" style="font-weight: bold;">Registrarse</h1>
                             @csrf
                             <div class="mb-3">
                                 <label class="form-label w-100">
-                                    <h4 style="font-family: 'Poppins';">Nombre:</h4>
-                                    <input placeholder="Ingrese su nombre" class="form-control w-100" type="text" name="name" style="font-family: 'Poppins';">
+                                    <h4>Nombre:</h4>
+                                    <input placeholder="Ingrese su nombre" class="form-control w-100" type="text" name="name">
                                 </label>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label w-100">
-                                    <h4 style="font-family: 'Poppins';">Email:</h4>
-                                    <input placeholder="Ingrese su correo electrónico" class="form-control w-100" type="email" name="email" style="font-family: 'Poppins';">
+                                    <h4>Email:</h4>
+                                    <input placeholder="Ingrese su correo electrónico" class="form-control w-100" type="email" name="email">
                                 </label>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label w-100">
-                                    <h4 style="font-family: 'Poppins';">Contraseña:</h4>
+                                    <h4>Contraseña:</h4>
                                     <input class="form-control" type="password" name="password">
                                 </label>
                             </div>
                             <div>
-                                <button type="submit" class="btn btn-primary" style="font-family: 'Poppins';">Registrarse</button>
+                                <button type="submit" class="btn btn-primary">Registrarse</button>
                             </div>
                         </form> 
                     </div>

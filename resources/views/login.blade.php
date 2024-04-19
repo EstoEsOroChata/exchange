@@ -15,7 +15,7 @@
 
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid" style="font-family: 'Poppins';">
         <div class="row">
             <div class="bg-image" style="background-image: url('https://i.gyazo.com/a87b7ca685d14403197eb7382f5e0ec2.jpg'); background-repeat: no-repeat; background-size: cover; height: 100vh">   
                 <div style="padding-top: 10px;">
@@ -26,29 +26,29 @@
                 <div class="d-flex justify-content-center align-items-center" style="height: 90vh;">
                     <div style="background-color: rgba(255, 255, 255, 0.5); border-radius: 20px;">
                         <form method="POST" action="{{route('login')}}" class="p-4">
-                            <h1 class="display-4" style="font-family: 'Poppins';font-weight: bold;">Iniciar sesión</h1>
+                            <h1 class="display-4" style="font-weight: bold;">Iniciar sesión</h1>
                             @csrf
                             <div class="mb-3">
                                 <label class="form-label w-100">
-                                    <h4 style="font-family: 'Poppins';">Email:</h4>
-                                    <input placeholder="Ingrese su correo electrónico" class="form-control w-100" type="email" name="email" style="font-family: 'Poppins';">
+                                    <h4>Email:</h4>
+                                    <input placeholder="Ingrese su correo electrónico" class="form-control w-100" type="email" name="email">
                                 </label>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label w-100">
-                                    <h4 style="font-family: 'Poppins';">Contraseña:</h4>
+                                    <h4>Contraseña:</h4>
                                     <input class="form-control" type="password" name="password">
                                 </label>
                             </div>
                             <div class="mb-3 form-check">
                                 <input type="checkbox" class="form-check-input" name="recordar">
-                                <label class="form-check-label"><h6 style="font-family: 'Poppins';">Mantener sesión iniciada</h6></label>
+                                <label class="form-check-label"><h6>Mantener sesión iniciada</h6></label>
                             </div>
                             <div class="mb-3">
-                                <h6 style="font-family: 'Poppins';">¿No tienes cuenta?<a href="{{route('registro')}}"> Regístrate</h6></a>
+                                <h6>¿No tienes cuenta?<a href="{{route('registro')}}"> Regístrate</h6></a>
                             </div>
                             <div>
-                                <button type="submit" class="btn btn-primary" style="font-family: 'Poppins';">Iniciar sesión</button>
+                                <button type="submit" class="btn btn-primary">Iniciar sesión</button>
                             </div>
                         </form> 
                     </div>
