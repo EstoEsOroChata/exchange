@@ -54,19 +54,23 @@
                         @if(auth()->check() && auth()->id() !== $subasta->user_id)
                             <form action="{{ route('subastas.pujar', $subasta) }}" method="POST">
                                 @csrf
-                                <div class="form-group">
+                                <div style="font-family: 'Poppins'; font-size: 20px;" class="form-group">
                                     <label for="puja">Realizar puja:</label>
-                                    <input type="number" id="puja" name="puja" min="{{$subasta->puja + 1}}" value="{{$subasta->puja + 1}}" required>
-                                    <button type="submit">Pujar</button>
+                                    <input type="number" id="puja" name="puja" min="{{$subasta->puja + 1}}" value="{{$subasta->puja + 1}}" class="form-control" required>
+                                    <div style="padding-top: 10px;">
+                                    <button class="btn btn-info" type="submit">Pujar</button>
+                                    </div>
                                 </div>
                             </form>
                         @endif
+                        <div style="padding-top: 10px; font-family: 'Poppins';">
                         @if(auth()->check() && auth()->id() !== $subasta->user_id)
                             <form action="{{ route('subastas.comprar', $subasta) }}" method="POST">
                                 @csrf
-                                <button type="submit">Comprar por {{ $subasta->precio }} oros</button>
+                                <button class="btn btn-success" type="submit">Comprar por {{ $subasta->precio }} oros</button>
                             </form>
                         @endif
+                        </div>
                         <div style="display: flex; gap: 10px; align-items: center;">
                         @if(auth()->check() && auth()->id() === $subasta->user_id)
                         <a style="font-family: 'Poppins';" class="btn btn-warning" href="{{ route('subastas.edit', $subasta) }}">Editar subasta</a>
@@ -78,11 +82,13 @@
                             </form>
                         @endif
                         <!-- Eliminar Subasta -->
+                        @if(auth()->check() && auth()->id() === $subasta->user_id)
                         <form action="{{route('subastas.destroy', $subasta)}}" method="POST">
                             @csrf
                             @method('delete')
                             <button style="font-family: 'Poppins';" class="btn btn-danger" type="submit">Eliminar subasta</button>
                         </form>
+                        @endif
                         </div>
                     </div>
                 </div>
