@@ -45,7 +45,7 @@
                 </nav>
                 
                 <div class="d-flex justify-content-center align-items-start" style="padding-top: 10px;">
-                    <div class="border" style="background-color: rgba(255, 255, 255, 0.5); border-radius: 20px; padding: 15px;">
+                    <div style="background-color: rgba(255, 255, 255, 0.5); border-radius: 20px; padding: 15px;">
                         <h1 class="display-5 text-center mb-4" style="font-family: 'Poppins'; font-weight: bold;">Subastas activas</h1>
                         <ul class="list-group">
                             @foreach ($subastas as $subasta)
