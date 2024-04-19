@@ -14,7 +14,7 @@ class SubastaController extends Controller
 {
     public function index(){
 
-        $subastas = Subasta::orderBy('id', 'desc')->paginate();
+        $subastas = Subasta::orderBy('id', 'desc')->simplePaginate();
 
         return view('subastas.index', compact('subastas'));
     }

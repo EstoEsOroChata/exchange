@@ -51,12 +51,12 @@
                 <div class="d-flex justify-content-center align-items-center" style="padding-top: 15px;">
                 <div class="" style="background-color: rgba(255, 255, 255, 0.5); border-radius: 20px; padding-left: 15px; padding-right: 15px; padding-top: 5px;">
                     <h1 class="display-5" style="font-weight: bold;">Perfil de {{$usuario->name}} </h1>
-                     <div style="padding-bottom: 15px; padding-top: 15px;">
+                     <div>
                     @if(Auth::user()->id == $usuario->id)
                     <h2>Dinero: {{Auth::user()->oro}} <img src="https://i.gyazo.com/7119885b63b3be6949d26f8b92255a31.png" alt="oro" width="30" height="30" style="border-radius: 5px;"></h2>
                     @endif
                 </div>
-                <div style="padding-bottom: 15px; padding-top: 15px;">
+                <div style="padding-top: 15px;">
                     @if(Auth::user()->id == $usuario->id)
                     <h2>Tu inventario:</h2>
                     @if($usuario->productos->isEmpty())
@@ -105,8 +105,9 @@
                 @endif   
             </div>
                     @if (Auth::user()->id == $usuario->id)
-                    <div style="padding-bottom: 15px;">
                         <h2>Tus subastas:</h2>
+                        <div style="padding-bottom: 15px">
+                        <div class="overflow-auto" style="max-height: 340px; padding-bottom: 5px;">
                         @else
                             <h2>Subastas de {{$usuario->name}}</h2>
                         @endif
@@ -121,6 +122,7 @@
                          <p>No tienes subastas activas en este momento.</p>
                      @endif
                     </div>
+                </div>
                 </div>
             </div>
             </div>
