@@ -56,8 +56,7 @@ class User extends Authenticatable
 
     public function productos()
     {
-        return $this->belongsToMany(Producto::class, 'users_productos', 'user_id', 'producto_id')
-            ->withPivot('cantidad');
+        return $this->belongsToMany(Producto::class, 'users_productos', 'user_id', 'producto_id')->withPivot('cantidad')->wherePivot('cantidad', '>', 0);
     }
 
     //Relación uno a muchos

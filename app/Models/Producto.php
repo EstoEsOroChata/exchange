@@ -20,7 +20,6 @@ class Producto extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'users_productos', 'producto_id', 'user_id')
-            ->withPivot('cantidad');
+        return $this->belongsToMany(User::class, 'users_productos', 'producto_id', 'user_id')->withPivot('cantidad')->wherePivot('cantidad', '>', 0);
     }
 }

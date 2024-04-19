@@ -23,6 +23,7 @@ class StoreSubasta extends FormRequest
     public function rules(): array
     {
         return [
+            'producto_id' => 'required',
             'name' => 'required|min:3',
             'cantidad' => 'required|numeric|gt:0',
             'puja' => 'required|numeric',
@@ -34,11 +35,12 @@ class StoreSubasta extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'El nombre es obligatorio',
-            'cantidad.required' => 'La cantidad es obligatoria',
-            'puja.required' => 'La puja es obligatoria',
+            'producto_id.required' => 'La cantidad que has seleccionado es mayor a la que tienes.',
+            'name.required' => 'El nombre es obligatorio.',
+            'cantidad.required' => 'La cantidad es obligatoria.',
+            'puja.required' => 'La puja es obligatoria.',
             'precio.gt' => 'El precio debe ser mayor que la puja.',
-            'fecha_limite.required' => 'La fecha límite es obligatoria'
+            'fecha_limite.required' => 'La fecha límite es obligatoria.'
         ];
     }
 }

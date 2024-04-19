@@ -25,17 +25,14 @@
                         <img src="https://i.gyazo.com/4535fd5fe9889dbdaf5e02384f888481.png" class="img-thumbnail" style="width: auto; height: 50px; min-width: 200px;" alt="Logo">
                     </a>
                     <ul class="nav nav-pills" style="margin-right: auto;">
-                        <li class="nav-item" style="padding-right: 20px;">
-                            <a class="btn btn-primary" href="{{route('subastas.index')}}">Ir a subastas</a>
-                        </li>
                         <li class="nav-item">
                             <a class="btn btn-primary" href="{{route('subastas.create')}}">Crear subasta</a>
                         </li>
                     </ul>
                 
-                    <ul class="" style="padding-right: 350px;">
-                        <form class="form-inline" style="display: flex; margin-top: 15px;" >
-                            <input class="form-control mr-sm-2" type="search" style="width: 460px;" placeholder="Buscar subasta" aria-label="Search">
+                    <ul class="" style="">
+                        <form class="form-inline" style="display: flex; margin-top: 15px; padding-right: 215px;" >
+                            <input class="form-control mr-sm-2" type="search" style="width: 450px;" placeholder="Buscar subasta" aria-label="Search">
                             <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
                         </form>
                     </ul>

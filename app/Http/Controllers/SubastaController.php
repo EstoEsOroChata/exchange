@@ -33,6 +33,7 @@ class SubastaController extends Controller
         }
 
         $request->validate([
+            'producto_id' => 'required',
             'cantidad' => 'required|numeric|gt:0',
             'puja' => 'required|numeric',
             'precio' => 'required|numeric|gt:puja',
