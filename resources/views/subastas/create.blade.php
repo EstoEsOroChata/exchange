@@ -83,7 +83,7 @@
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control @error('cantidad') is-invalid @enderror" id="floatingInputCantidad" placeholder="Cantidad" name="cantidad" value="{{old('cantidad')}}" pattern="\d*" title="Solo de admiten números" required>
+                        <input type="text" class="form-control @error('cantidad') is-invalid @enderror" id="floatingInputCantidad" placeholder="Cantidad" name="cantidad" value="{{old('cantidad')}}">
                         <label for="floatingInputCantidad">Cantidad</label>
                         @error('cantidad')
                             <div class="alert alert-danger">{{$message}}</div>
@@ -91,7 +91,7 @@
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control @error('puja') is-invalid @enderror" id="floatingInputPuja" placeholder="Precio" name="puja" value="{{old('puja')}}" pattern="\d*" title="Solo de admiten números" required>
+                        <input type="text" class="form-control @error('puja') is-invalid @enderror" id="floatingInputPuja" placeholder="Precio" name="puja" value="{{old('puja')}}">
                         <label for="floatingInput">Puja</label>
                         @error('puja')
                             <div class="alert alert-danger">{{$message}}</div>
@@ -99,7 +99,7 @@
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control @error('precio') is-invalid @enderror" id="floatingInput" placeholder="Cantidad" name="precio" value="{{old('precio')}}" pattern="\d*" title="Solo de admiten números" required>
+                        <input type="text" class="form-control @error('precio') is-invalid @enderror" id="floatingInput" placeholder="Cantidad" name="precio" value="{{old('precio')}}">
                         <label for="floatingInput">Precio</label>
                         @error('precio')
                             <div class="alert alert-danger">{{$message}}</div>
@@ -107,7 +107,7 @@
                     </div>
 
                     <div>
-                    <select class="form-select mb-3 @error('duracion_subasta') is-invalid @enderror" name="duracion_subasta" value="{{old('duracion_subasta')}}" required>
+                    <select class="form-select mb-3 @error('duracion_subasta') is-invalid @enderror" name="duracion_subasta" value="{{old('duracion_subasta')}}">
                         <option selected disabled value="">Selecciona el tiempo límite de la subasta</option>
                         <option value="12">12 horas</option>
                         <option value="24">24 horas</option>

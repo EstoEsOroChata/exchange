@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreSubasta;
 use App\Models\Producto;
 use App\Models\Subasta;
 use Illuminate\Http\Request;
@@ -12,26 +11,38 @@ use Carbon\Carbon;
 
 class SubastaController extends Controller
 {
+    //Método para mostrar las subastas
     public function index(){
 
+        //Las muestra ordenadas por ID descendente y paginadas
         $subastas = Subasta::orderBy('id', 'desc')->simplePaginate();
 
         return view('subastas.index', compact('subastas'));
     }
 
+    //Método para mostrar el formulario de creacion de subasta
     public function create(){
+
+        //Obtiene el usuario autenticado y sus productos sin repetirlos
         $user = auth()->user();
         $productos = $user->productos->unique('name');
         return view('subastas.create', compact('productos'));
     }
 
+    //Método para almacenar una nueva subasta
     public function store(Request $request){
         
+        //Comprueba que el usuario tiene la cantidad de producto que pone en el formulario
         $userProducto = UsersProductos::where('user_id', auth()->id())->where('producto_id', $request->producto_id)->firstOrFail();
-        if ($userProducto->cantidad < $request->cantidad) {
-            return redirect()->back()->with('error', 'No tienes suficiente cantidad para crear la subasta');
+    
+        $cantidadDisponible = (int)$userProducto->cantidad;
+        $cantidadSolicitada = (int)$request->cantidad;
+    
+        if ($cantidadDisponible < $cantidadSolicitada) {
+            return redirect()->route('subastas.create')->withErrors(['cantidad' => 'La cantidad supera la que tienes disponible.']);
         }
 
+        //Validaciones
         $request->validate([
             'producto_id' => 'required',
             'cantidad' => 'required|numeric|gt:0',
@@ -42,8 +53,10 @@ class SubastaController extends Controller
         
         //El nombre del producto
         $producto = Producto::findOrFail($request->producto_id);
+        //Le asigno un nombre al producto porque los estoy cogiendo por su id
         $nombreProducto = $producto->name;
 
+        //Cálculo para la fecha límite
         $duracionSubasta = $request->input('duracion_subasta');
         $fechaLimite = Carbon::now()->addHours(intval($duracionSubasta));
 
@@ -60,23 +73,27 @@ class SubastaController extends Controller
         $subasta->producto_id = $request->producto_id;
         
         $subasta->save();
-        //dd($subasta);
+        
         //Quitar la cantidad de producto al creador de la subasta
         $userProducto = UsersProductos::where('user_id', auth()->id())->where('producto_id', $request->producto_id)->firstOrFail();
     
+        //Le resto la cantidad de producto que ha puesto en subasta
         $userProducto->cantidad -= $request->cantidad;
         $userProducto->save();
     
         return redirect()->route('subastas.show', $subasta);
     }
 
+    //Método para mostrar una subasta
     public function show(Subasta $subasta){
 
         return view('subastas.show', compact('subasta'));
     }
 
+    //Método para editar una subasta
     public function edit(Subasta $subasta){
 
+        //Comprueba si el usuario es el creador de la subasta
         if ($subasta->user_id !== auth()->id()) {
             abort(403, 'No tienes permiso para editar esta subasta.');
         }
@@ -84,21 +101,23 @@ class SubastaController extends Controller
         return view('subastas.edit', compact('subasta'));
     }
 
+    //Método para actualizar el precio de una subasta
     public function update(Request $request, Subasta $subasta) {
-        var_dump($subasta->user_id, auth()->id());
+        
+        //Comprueba si el usuario es el creador de la subasta
         if ($subasta->user_id !== auth()->id()) {
             abort(403, 'No tienes permiso para editar esta subasta.');
         }
         
+        //Actualiza el precio
         $subasta->precio = $request->precio;
-        //$subasta->fecha_limite = $request->fecha_limite;
 
         $subasta->save();
 
         return redirect()->route('subastas.show', $subasta);
     }
 
-
+    //Método para pujar en las subastas
     public function pujar(Subasta $subasta, Request $request)
 {
     //Validaciones
@@ -113,12 +132,12 @@ class SubastaController extends Controller
 
     $user = auth()->user();
 
-    //Comprueba si tiene oro (si va)
+    //Comprueba si tiene oro
     if ($user->oro < $request->puja) {
         return redirect()->back()->with('error', 'No tienes suficiente oro para realizar esta puja.');
     }
 
-    //Resto oro (si va)
+    //Resto oro
     if ($user instanceof \App\Models\User) {
         $user->decrement('oro', $request->puja);
     } else {
@@ -133,6 +152,7 @@ class SubastaController extends Controller
     return redirect()->back()->with('success', 'Puja realizada con éxito.');
 }
 
+    //Método para comprar un producto
     public function comprar(Subasta $subasta)
 {
     //Para comprobar si el usuario esta logeado y tiene oro
@@ -163,8 +183,9 @@ class SubastaController extends Controller
     }
 }
     
-public function finalizarSubasta(Subasta $subasta)
-{
+    //Metodo para terminar la subasta, recoger el dinero y entregar el producto al pujador
+    public function finalizarSubasta(Subasta $subasta)
+    {
     // Verificar si el usuario actual es el creador de la subasta
     if (auth()->user()->id !== $subasta->user_id) {
         return redirect()->back()->with('error', 'No tienes permiso para finalizar esta subasta.');
@@ -184,7 +205,9 @@ public function finalizarSubasta(Subasta $subasta)
     return redirect()->route('subastas.index')->with('success', 'Subasta finalizada con éxito.');
 }
 
+//Método para eliminar una subasta
 public function destroy(Subasta $subasta){
+    
     //Si la puja es mayor a 0 y hay un pujador asignado, devuelve el oro al pujador
     if ($subasta->puja > 0 && $subasta->pujador_id) {
         $pujador = User::findOrFail($subasta->pujador_id);
