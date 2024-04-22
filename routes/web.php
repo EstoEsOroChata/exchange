@@ -4,6 +4,7 @@ use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SubastaController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,3 +43,4 @@ Route::get('/cerrar-sesion',[LoginController::class,'logout'])->name('logout');
 Route::get('/perfil/{id}', [InventarioController::class, 'show'])->middleware('auth')->name('perfil.show');
 //Route::get('/perfil/subastas', [InventarioController::class, 'subastasUsuario'])->name('perfil.subastas');
 
+Route::get('search/subastas', [SearchController::class, 'subastas'])->name('search.subastas');

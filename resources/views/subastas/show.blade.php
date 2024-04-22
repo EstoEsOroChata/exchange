@@ -1,18 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Subasta de {{$subasta->name}}</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Subastas</title>
+    
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-ui@1.13.2/jquery-ui.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+    
+        <style>
+            .ui-autocomplete {
+                list-style-type: none;
+                position: absolute;
+                background-color: white;
+                border: 1px solid #ccc;
+                max-height: 200px;
+                overflow-y: auto;
+                z-index: 1000;
+                width: 400px;
+            }
+    
+            .ui-autocomplete .ui-menu-item {
+                padding: 8px 12px;
+                cursor: pointer;
+            }
+    
+            .ui-autocomplete .ui-menu-item:hover {
+                background-color: #f0f0f0;
+            }
+    
+            .ui-helper-hidden-accessible {
+            display: none;
+    }
+        </style>
+    </head>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Jersey+25&family=Russo+One&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-</head>
 <body>
     <div class="container-fluid" style="font-family: 'Poppins';">
         <div class="row">
@@ -30,12 +56,12 @@
                             <a class="btn btn-primary" href="{{route('subastas.create')}}">Crear subasta</a>
                         </li>
                     </ul>
-                    <form class="form-inline" style="display: flex; margin-top: 15px;" >
-                        <input class="form-control mr-sm-2" type="search" style="width: 460px;" placeholder="Buscar subasta" aria-label="Search">
-                        <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
-                    </form>
-                    <ul class="nav nav-pills" style="margin-left: auto; padding-right: 10px;">
-                        <li class="nav-item">
+                    <ul class="nav nav-pills" style="">
+                        <form class="form-inline" style="display: flex; margin-right: 100px;" >
+                            <input class="form-control mr-sm-2" id="search" style="width: 450px;" placeholder="Buscar subasta" aria-label="Search">
+                        </form>
+
+                        <li class="nav-item" style="display: flex; margin-right: 10px;">
                             <a class="btn btn-dark" href="{{ route('perfil.show', ['id' => Auth::id()]) }}">Mi perfil</a>
                         </li>
                     </ul>
@@ -83,12 +109,19 @@
                         @endif
                         <!-- Eliminar Subasta -->
                         @if(auth()->check() && auth()->id() === $subasta->user_id)
-                        <form action="{{route('subastas.destroy', $subasta)}}" method="POST">
+                        <form id="deleteForm" action="{{route('subastas.destroy', $subasta)}}" method="POST">
                             @csrf
                             @method('delete')
-                            <button class="btn btn-danger" type="submit">Eliminar subasta</button>
+                            <button class="btn btn-danger" type="button" onclick="confirmDelete()">Eliminar subasta</button>
                         </form>
                         @endif
+                        <script>
+                            function confirmDelete() {
+                                if (confirm("¿Estás seguro de que deseas eliminar esta subasta?")) {
+                                    document.getElementById("deleteForm").submit();
+                                }
+                            }
+                        </script>
                         </div>
                     </div>
                 </div>
@@ -97,5 +130,24 @@
     </div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        $('#search').autocomplete({ 
+        source: function(request, response){
+            $.ajax({
+                url: "{{route('search.subastas')}}",
+                dataType: 'json',
+                data: {
+                    term: request.term
+                },
+                success: function(data){
+                    response(data)
+                }
+            });
+        },
+        select: function(event, ui) {
+            window.location.href = "{{ route('subastas.show', '') }}/" + ui.item.slug;
+        }
+    });
+    </script>
 </body>
 </html>

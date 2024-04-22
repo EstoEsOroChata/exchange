@@ -31,14 +31,20 @@
                             <div class="mb-3">
                                 <label class="form-label w-100">
                                     <h4>Email:</h4>
-                                    <input placeholder="Ingrese su correo electrónico" class="form-control w-100" type="email" name="email">
+                                    <input placeholder="Ingrese su correo electrónico" class="form-control w-100" type="email" name="email" value="{{ old('email') }}">
                                 </label>
+                                @error('email')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label class="form-label w-100">
                                     <h4>Contraseña:</h4>
                                     <input class="form-control" type="password" name="password">
                                 </label>
+                                @error('password')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mb-3 form-check">
                                 <input type="checkbox" class="form-check-input" name="recordar">

@@ -1,18 +1,43 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Crea tu subasta</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Jersey+25&family=Russo+One&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Subastas</title>
     
-</head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-ui@1.13.2/jquery-ui.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+    
+        <style>
+            .ui-autocomplete {
+                list-style-type: none;
+                position: absolute;
+                background-color: white;
+                border: 1px solid #ccc;
+                max-height: 200px;
+                overflow-y: auto;
+                z-index: 1000;
+                width: 400px;
+            }
+    
+            .ui-autocomplete .ui-menu-item {
+                padding: 8px 12px;
+                cursor: pointer;
+            }
+    
+            .ui-autocomplete .ui-menu-item:hover {
+                background-color: #f0f0f0;
+            }
+    
+            .ui-helper-hidden-accessible {
+            display: none;
+    }
+        </style>
+    </head>
 <body>
     <div class="container-fluid" style="font-family: 'Poppins';">
         <div class="row">
@@ -28,21 +53,18 @@
                         </li>
                     </ul>
                 
-                    <ul class="" style="padding-right: 350px;">
-                        <form class="form-inline" style="display: flex; margin-top: 15px;" >
-                            <input class="form-control mr-sm-2" type="search" style="width: 460px;" placeholder="Buscar subasta" aria-label="Search">
-                            <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
+                    <ul class="nav nav-pills" style="">
+                        <form class="form-inline" style="display: flex; margin-right: 100px;" >
+                            <input class="form-control mr-sm-2" id="search" style="width: 450px;" placeholder="Buscar subasta" aria-label="Search">
                         </form>
-                    </ul>
-                
-                    <ul class="nav nav-pills" style="margin-left: auto; padding-right: 10px;">
-                        <li class="nav-item">
+
+                        <li class="nav-item" style="display: flex; margin-right: 10px;">
                             <a class="btn btn-dark" href="{{ route('perfil.show', ['id' => Auth::id()]) }}">Mi perfil</a>
                         </li>
                     </ul>
                 </nav>
                 
-                <div class="d-flex justify-content-start align-items-center" style="padding-top: 15px;">
+                <div class="d-flex justify-content-center align-items-center" style="padding-top: 15px;">
                 <div style="background-color: rgba(255, 255, 255, 0.5); border-radius: 20px; padding-left: 15px; padding-right: 15px; padding-top: 5px;">
                     
                     <form action="{{route('subastas.store')}}" method="POST">
@@ -64,7 +86,7 @@
                         <input type="text" class="form-control @error('cantidad') is-invalid @enderror" id="floatingInputCantidad" placeholder="Cantidad" name="cantidad" value="{{old('cantidad')}}" pattern="\d*" title="Solo de admiten números" required>
                         <label for="floatingInputCantidad">Cantidad</label>
                         @error('cantidad')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="alert alert-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -72,7 +94,7 @@
                         <input type="text" class="form-control @error('puja') is-invalid @enderror" id="floatingInputPuja" placeholder="Precio" name="puja" value="{{old('puja')}}" pattern="\d*" title="Solo de admiten números" required>
                         <label for="floatingInput">Puja</label>
                         @error('puja')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="alert alert-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -80,7 +102,7 @@
                         <input type="text" class="form-control @error('precio') is-invalid @enderror" id="floatingInput" placeholder="Cantidad" name="precio" value="{{old('precio')}}" pattern="\d*" title="Solo de admiten números" required>
                         <label for="floatingInput">Precio</label>
                         @error('precio')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="alert alert-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -92,7 +114,7 @@
                         <option value="48">48 horas</option>
                     </select>
                     @error('duracion_subasta')
-                        <div class="invalid-feedback">{{$message}}</div>
+                        <div class="alert alert-danger">{{$message}}</div>
                     @enderror
                     </div>
 
@@ -106,5 +128,24 @@
                 </div>
             </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script>
+            $('#search').autocomplete({ 
+            source: function(request, response){
+                $.ajax({
+                    url: "{{route('search.subastas')}}",
+                    dataType: 'json',
+                    data: {
+                        term: request.term
+                    },
+                    success: function(data){
+                        response(data)
+                    }
+                });
+            },
+            select: function(event, ui) {
+                window.location.href = "{{ route('subastas.show', '') }}/" + ui.item.slug;
+            }
+        });
+        </script>
     </body>
 </html>

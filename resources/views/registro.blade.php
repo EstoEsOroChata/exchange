@@ -23,26 +23,45 @@
                 <div class="d-flex justify-content-center align-items-center" style="height: 90vh;">
                     <div style="background-color: rgba(255, 255, 255, 0.5); border-radius: 20px;">
                         <form method="POST" action="{{route('validar')}}" class="p-4">
-                            <h1 class="display-4" style="font-weight: bold;">Registrarse</h1>
+
                             @csrf
+                            <h1 class="display-4" style="font-weight: bold;">Registrarse</h1>
                             <div class="mb-3">
                                 <label class="form-label w-100">
                                     <h4>Nombre:</h4>
-                                    <input placeholder="Ingrese su nombre" class="form-control w-100" type="text" name="name">
+                                    <input placeholder="Ingrese su nombre" class="form-control w-100" type="text" name="name" value="{{ old('name') }}">
                                 </label>
+                                @error('name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
+                        
                             <div class="mb-3">
                                 <label class="form-label w-100">
                                     <h4>Email:</h4>
-                                    <input placeholder="Ingrese su correo electrónico" class="form-control w-100" type="email" name="email">
+                                    <input placeholder="Ingrese su correo electrónico" class="form-control w-100" type="email" name="email" value="{{ old('email') }}">
                                 </label>
+                                @error('email')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
+                        
                             <div class="mb-3">
                                 <label class="form-label w-100">
                                     <h4>Contraseña:</h4>
                                     <input class="form-control" type="password" name="password">
                                 </label>
                             </div>
+                            <div class="mb-3">
+                                <label class="form-label w-100">
+                                    <h4>Confirmar contraseña:</h4>
+                                    <input class="form-control" type="password" name="password_confirmation">
+                                </label>
+                                @error('password')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        
                             <div>
                                 <button type="submit" class="btn btn-primary">Registrarse</button>
                             </div>
