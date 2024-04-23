@@ -21,6 +21,7 @@ class StoreSubasta extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
+    //Validaciones personalizadas
     {
         return [
             'producto_id' => 'required',

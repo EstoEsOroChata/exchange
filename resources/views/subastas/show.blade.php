@@ -108,7 +108,7 @@
                             </form>
                         @endif
                         <!-- Eliminar Subasta -->
-                        @if(auth()->check() && auth()->id() === $subasta->user_id)
+                        @if(auth()->check() && (auth()->id() === $subasta->user_id || auth()->user()->es_admin))
                         <form id="deleteForm" action="{{route('subastas.destroy', $subasta)}}" method="POST">
                             @csrf
                             @method('delete')

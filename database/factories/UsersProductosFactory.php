@@ -16,6 +16,7 @@ class UsersProductosFactory extends Factory
      */
     public function definition(): array
     {
+        //Con esto genero datos falsos para poder trastear con la aplicación
         return [
             'user_id' => $this->faker->numberBetween($min = 1, $max = 2), 
             'producto_id' => $this->faker->numberBetween($min = 1, $max = 10), 

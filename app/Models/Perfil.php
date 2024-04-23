@@ -11,10 +11,10 @@ class Perfil extends Model
 
     public function show($id)
 {
-    $perfil = Perfil::find($id); // Suponiendo que tu modelo se llama Perfil
+    //Busca el perfil con el ID asignado
+    $perfil = Perfil::find($id);
 
-    // Lógica para mostrar el perfil...
-
+    //Redirecciona a la vista "perfil" con el ID de perfil asignado
     return view('perfil.show', ['perfil' => $perfil]);
 }
 }

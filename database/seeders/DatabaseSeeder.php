@@ -23,10 +23,7 @@ class DatabaseSeeder extends Seeder
             UsersProductosSeeder::class,
         ]);
         
-        
-        //UsersProductos::factory(10)->create();
         UsersProductos::factory(10)->create();
-        // Historial::factory(10)->create();
         
 
         // User::factory()->create([

@@ -62,8 +62,8 @@
                             <input class="form-control mr-sm-2" id="search" style="width: 450px;" placeholder="Buscar subasta" aria-label="Search">
                         </form>
 
-                        <li class="nav-item" style="display: flex; margin-right: 10px;">
-                            <a class="btn btn-dark" href="{{ route('perfil.show', ['id' => Auth::id()]) }}">Mi perfil</a>
+                        <li class="nav-item" style="padding-right: 10px">
+                            <a class="btn btn-danger" href="{{route('logout')}}">Cerrar sesión</a>
                         </li>
                     </ul>
                 </nav>

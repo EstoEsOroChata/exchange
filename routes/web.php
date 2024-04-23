@@ -34,13 +34,12 @@ Route::post('/subastas/{subasta}/finalizar', [SubastaController::class, 'finaliz
 //Login
 Route::view('/login', 'login')->name('iniciar-sesion');
 Route::view('/registro', 'registro')->name('registro');
-//Route::view('/perfil', 'secret')->middleware('auth')->name('perfil');
+
 
 Route::post('/validar-registro',[LoginController::class,'registro'])->name('validar');
 Route::post('/iniciar-sesion',[LoginController::class,'login'])->name('login');
 Route::get('/cerrar-sesion',[LoginController::class,'logout'])->name('logout');
 
 Route::get('/perfil/{id}', [InventarioController::class, 'show'])->middleware('auth')->name('perfil.show');
-//Route::get('/perfil/subastas', [InventarioController::class, 'subastasUsuario'])->name('perfil.subastas');
 
 Route::get('search/subastas', [SearchController::class, 'subastas'])->name('search.subastas');
