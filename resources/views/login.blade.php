@@ -27,7 +27,10 @@
                     <div style="background-color: rgba(255, 255, 255, 0.5); border-radius: 20px;">
                         <form method="POST" action="{{route('login')}}" class="p-4">
                             <h1 class="display-4" style="font-weight: bold;">Iniciar sesión</h1>
+
                             @csrf
+
+                            <!-- Correo electrónico -->
                             <div class="mb-3">
                                 <label class="form-label w-100">
                                     <h4>Email:</h4>
@@ -37,6 +40,8 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+
+                            <!-- Contraseña -->
                             <div class="mb-3">
                                 <label class="form-label w-100">
                                     <h4>Contraseña:</h4>
@@ -46,13 +51,19 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+
+                            <!-- Recordar sesión -->
                             <div class="mb-3 form-check">
                                 <input type="checkbox" class="form-check-input" name="recordar">
                                 <label class="form-check-label"><h6>Mantener sesión iniciada</h6></label>
                             </div>
+
+                            <!-- Enlace para registrarse si no tiene cuenta -->
                             <div class="mb-3">
                                 <h6>¿No tienes cuenta?<a href="{{route('registro')}}"> Regístrate</h6></a>
                             </div>
+
+                            <!-- Botón para enviar los datos de inicio de sesión -->
                             <div>
                                 <button type="submit" class="btn btn-primary">Iniciar sesión</button>
                             </div>

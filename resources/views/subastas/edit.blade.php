@@ -43,7 +43,7 @@
     <div class="container-fluid" style="font-family: 'Poppins';">
         <div class="row">
             <div class="bg-image" style="background-image: url('https://i.gyazo.com/a87b7ca685d14403197eb7382f5e0ec2.jpg'); background-repeat: no-repeat; background-size: cover; height: 100vh"> 
-                <!-- Navbar -->
+                
                 <nav class="navbar navbar-light" style="background-color: rgba(255, 255, 255, 0.5); border-radius: 20px;">
                     <a style="padding-left: 8px" class="navbar-brand" href="{{route('home')}}">
                         <img src="https://i.gyazo.com/4535fd5fe9889dbdaf5e02384f888481.png" class="img-thumbnail" style="width: auto; height: 50px; min-width: 200px;" alt="Logo">
@@ -66,11 +66,12 @@
                         </li>
                     </ul>
                 </nav>
-                <!-- Content -->
+                
                 <div class="d-flex justify-content-center align-items-start" style="padding-top: 10px;">
                     <div style="background-color: rgba(255, 255, 255, 0.5); border-radius: 20px; padding: 15px;">
                         <h1 class="display-5 text-center mb-4" style="font-weight: bold;">Editando subasta de: {{$subasta->name}}</h1>
                         <div>
+                            <!-- Formulario para editar el precio de la subasta -->
                             <form action="{{route('subastas.update', $subasta)}}" method="POST">
                         
                             @csrf
@@ -82,9 +83,11 @@
                                 <input type="text" class="form-control" name="precio" value="{{ old('precio', $subasta->precio)}}" pattern="\d*" title="Solo de admiten números">
                             </label>
                         
+                            <!-- Mensaje de error si falla la validación -->
                             @error('precio')
                                 <span>{{$message}}</span>
                             @enderror
+                            <!-- Botón para enviar los cambios -->
                         <div style="padding-top: 10px;">
                             <button class="btn btn-success" type="submit">Guardar cambios</button>
                         </div>
@@ -96,7 +99,7 @@
             </div>
         </div>
     </div>
-    <!-- Bootstrap JS -->
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         $('#search').autocomplete({ 

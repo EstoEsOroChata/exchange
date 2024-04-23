@@ -72,10 +72,14 @@
                 <div class="" style="background-color: rgba(255, 255, 255, 0.5); border-radius: 20px; padding-left: 15px; padding-right: 15px; padding-top: 5px;">
                     <h1 class="display-5" style="font-weight: bold;">Perfil de {{$usuario->name}} </h1>
                      <div>
+
+                    <!-- Oro del usuario -->
                     @if(Auth::user()->id == $usuario->id)
                     <h2>Dinero: {{Auth::user()->oro}} <img src="https://i.gyazo.com/7119885b63b3be6949d26f8b92255a31.png" alt="oro" width="30" height="30" style="border-radius: 5px;"></h2>
                     @endif
                 </div>
+
+                <!-- Inventario del usuario -->
                 <div style="padding-top: 15px;">
                     @if(Auth::user()->id == $usuario->id)
                     <h2>Tu inventario:</h2>
@@ -94,6 +98,7 @@
                                 $productos_agrupados = [];
                             @endphp
                 
+                            <!-- Agrupación de productos -->
                             @foreach ($usuario->productos as $producto)
                                 @php
                                     $nombre = $producto->name;
@@ -111,6 +116,7 @@
                                 @endif
                             @endforeach
                 
+                            <!-- Mostrar productos agrupados -->
                             @foreach ($productos_agrupados as $nombre => $cantidad)
                                 @if ($cantidad > 0)
                                 <tr>
@@ -124,6 +130,8 @@
                     @endif
                 @endif   
             </div>
+
+                    <!-- Subastas del usuario -->
                     @if (Auth::user()->id == $usuario->id)
                         <h2>Tus subastas:</h2>
                         <div style="padding-bottom: 15px">
@@ -132,6 +140,7 @@
                             <h2>Subastas de {{$usuario->name}}</h2>
                         @endif
                 
+                        <!-- Lista de subastas -->
                         @if ($subastas->count() > 0)
                             <ul class="list-group">
                              @foreach ($subastas as $subasta)

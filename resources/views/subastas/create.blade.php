@@ -67,6 +67,7 @@
                 <div class="d-flex justify-content-center align-items-center" style="padding-top: 15px;">
                 <div style="background-color: rgba(255, 255, 255, 0.5); border-radius: 20px; padding-left: 15px; padding-right: 15px; padding-top: 5px;">
                     
+                    <!-- Formulario de creación de subasta -->
                     <form action="{{route('subastas.store')}}" method="POST">
                     @csrf
 
@@ -82,6 +83,7 @@
                     </select>
                     </div>
 
+                    <!-- Campos para poner cantidad, puja, precio y duración de la subasta -->
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control @error('cantidad') is-invalid @enderror" id="floatingInputCantidad" placeholder="Cantidad" name="cantidad" value="{{old('cantidad')}}">
                         <label for="floatingInputCantidad">Cantidad</label>
@@ -118,6 +120,7 @@
                     @enderror
                     </div>
 
+                    <!-- Botón para enviar la subasta -->
                     <div style="padding-bottom: 15px;">
                     <button type="submit" class="btn btn-primary">Crear subasta</button>
                     </div>

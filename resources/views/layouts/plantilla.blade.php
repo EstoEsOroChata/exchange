@@ -17,7 +17,7 @@
         font-weight: bold;
     }
 </style>
-{{-- @vite('resources/css/app.css') --}}
+
 </head>
     <body>
     <div class="container">

@@ -27,6 +27,8 @@
                             @csrf
                             <h1 class="display-4" style="font-weight: bold;">Registrarse</h1>
                             <div class="mb-3">
+
+                                <!-- Nombre -->
                                 <label class="form-label w-100">
                                     <h4>Nombre:</h4>
                                     <input placeholder="Ingrese su nombre" class="form-control w-100" type="text" name="name" value="{{ old('name') }}">
@@ -36,6 +38,7 @@
                                 @enderror
                             </div>
                         
+                            <!-- Email -->
                             <div class="mb-3">
                                 <label class="form-label w-100">
                                     <h4>Email:</h4>
@@ -46,12 +49,15 @@
                                 @enderror
                             </div>
                         
+                            <!-- Contraseña -->
                             <div class="mb-3">
                                 <label class="form-label w-100">
                                     <h4>Contraseña:</h4>
                                     <input class="form-control" type="password" name="password">
                                 </label>
                             </div>
+
+                            <!-- Confirmar contraseña -->
                             <div class="mb-3">
                                 <label class="form-label w-100">
                                     <h4>Confirmar contraseña:</h4>
@@ -62,6 +68,7 @@
                                 @enderror
                             </div>
                         
+                            <!-- Botón para enviar datos de registro -->
                             <div>
                                 <button type="submit" class="btn btn-primary">Registrarse</button>
                             </div>

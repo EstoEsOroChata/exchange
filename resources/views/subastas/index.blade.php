@@ -70,14 +70,24 @@
                     <div style="background-color: rgba(255, 255, 255, 0.5); border-radius: 20px; padding: 20px;">
                         <h1 class="display-5 text-center mb-4" style="font-weight: bold;">Subastas activas</h1>
                         <ul class="list-group">
+
+                            <!-- Lista de subastas -->
                             @foreach ($subastas as $subasta)
+
+                            <!-- Lista de subastas -->
                                 <li class="list-group-item list-group-item-action text-center">
+
+                                    <!-- Enlace a cada subasta -->
                                     <a href="{{ route('subastas.show', $subasta) }}">
+
+                                        <!-- Nombre de cada subasta -->
                                         {{ $subasta->name }}
                                     </a>
                                 </li>
                             @endforeach
                         </ul>
+
+                        <!-- Paginación con enlaces -->
                         {{ $subastas->links() }}
                     </div>
                 </div>

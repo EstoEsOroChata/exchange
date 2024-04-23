@@ -43,7 +43,7 @@
     <div class="container-fluid" style="font-family: 'Poppins';">
         <div class="row">
             <div class="bg-image" style="background-image: url('https://i.gyazo.com/a87b7ca685d14403197eb7382f5e0ec2.jpg'); background-repeat: no-repeat; background-size: cover; height: 100vh"> 
-                <!-- Navbar -->
+               
                 <nav class="navbar navbar-light" style="background-color: rgba(255, 255, 255, 0.5); border-radius: 20px;">
                     <a style="padding-left: 8px" class="navbar-brand" href="{{route('home')}}">
                         <img src="https://i.gyazo.com/4535fd5fe9889dbdaf5e02384f888481.png" class="img-thumbnail" style="width: auto; height: 50px; min-width: 200px;" alt="Logo">
@@ -66,17 +66,20 @@
                         </li>
                     </ul>
                 </nav>
-                <!-- Content -->
+                
                 <div class="d-flex justify-content-center align-items-start" style="padding-top: 10px;">
                     <div style="background-color: rgba(255, 255, 255, 0.5); border-radius: 20px; padding: 15px;">
                         <h1 class="display-5 text-center mb-4" style="font-weight: bold;">Subasta de: {{$subasta->name}}</h1>
                         <div style="font-size: 20px;">
+
+                            <!-- Información de la subasta -->
                             <p><strong>Cantidad disponible: </strong>{{$subasta->cantidad}}</p>
                             <p><strong>Puja actual: </strong>{{$subasta->puja}}</p>
                             <p><strong>Precio de compra: </strong>{{$subasta->precio}}</p>
                             <p><strong>Fecha límite: </strong>{{$subasta->fecha_limite}}</p>
                             <p>Creador de la subasta: <a href="{{ route('perfil.show', $subasta->user->id) }}">{{ $subasta->user->name }}</a></p>
                         </div>
+                        <!-- Realizar una puja si no eres el creador de la subasta -->
                         @if(auth()->check() && auth()->id() !== $subasta->user_id)
                             <form action="{{ route('subastas.pujar', $subasta) }}" method="POST">
                                 @csrf
@@ -89,6 +92,8 @@
                                 </div>
                             </form>
                         @endif
+
+                        <!-- Botón para comprar lel producto si no eres el creador de la subasta -->
                         <div style="padding-top: 10px;">
                         @if(auth()->check() && auth()->id() !== $subasta->user_id)
                             <form action="{{ route('subastas.comprar', $subasta) }}" method="POST">
@@ -97,6 +102,8 @@
                             </form>
                         @endif
                         </div>
+
+                        <!-- Acciones para el dueño de la subasta -->
                         <div style="display: flex; gap: 10px; align-items: center;">
                         @if(auth()->check() && auth()->id() === $subasta->user_id)
                         <a class="btn btn-warning" href="{{ route('subastas.edit', $subasta) }}">Editar subasta</a>
@@ -107,7 +114,8 @@
                                 <button class="btn btn-success" type="submit">Finalizar Subasta</button>
                             </form>
                         @endif
-                        <!-- Eliminar Subasta -->
+
+                        <!-- Eliminar subasta (solo lo ve el dueño de la subasta) -->
                         @if(auth()->check() && (auth()->id() === $subasta->user_id || auth()->user()->es_admin))
                         <form id="deleteForm" action="{{route('subastas.destroy', $subasta)}}" method="POST">
                             @csrf
@@ -128,7 +136,7 @@
             </div>
         </div>
     </div>
-    <!-- Bootstrap JS -->
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         $('#search').autocomplete({ 
