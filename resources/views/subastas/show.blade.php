@@ -71,7 +71,7 @@
                     <div style="background-color: rgba(255, 255, 255, 0.5); border-radius: 20px; padding: 15px;">
                         <h1 class="display-5 text-center mb-4" style="font-weight: bold;">Subasta de: {{$subasta->name}}</h1>
                         <div style="font-size: 20px;">
-
+                
                             <!-- Información de la subasta -->
                             <p><strong>Cantidad disponible: </strong>{{$subasta->cantidad}}</p>
                             <p><strong>Puja actual: </strong>{{$subasta->puja}}</p>
@@ -87,75 +87,55 @@
                                     <label for="puja">Realizar puja:</label>
                                     <input type="number" id="puja" name="puja" min="{{$subasta->puja + 1}}" value="{{$subasta->puja + 1}}" class="form-control" required>
                                     <div style="padding-top: 10px;">
-                                    <button class="btn btn-info" type="submit">Pujar</button>
+                                    <button class="btn btn-info" style="margin-bottom: 10px" type="submit">Pujar</button>
                                     </div>
+                                    @error('puja')
+                                    <div class="alert alert-danger">{{$message}}</div>
+                                    @enderror
                                 </div>
                             </form>
                         @endif
-
-                        <!-- Botón para comprar lel producto si no eres el creador de la subasta -->
-                        <div style="padding-top: 10px;">
+                
+                        <!-- Botón para comprar el producto si no eres el creador de la subasta -->
                         @if(auth()->check() && auth()->id() !== $subasta->user_id)
                             <form action="{{ route('subastas.comprar', $subasta) }}" method="POST">
                                 @csrf
-                                <button class="btn btn-success" type="submit">Comprar por {{ $subasta->precio }} oros</button>
+                                <button class="btn btn-success" style="margin-bottom: 10px" type="submit">Comprar por {{ $subasta->precio }} oros</button>
+                                @error('compra')
+                                <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
                             </form>
                         @endif
-                        </div>
-
                         <!-- Acciones para el dueño de la subasta -->
                         <div style="display: flex; gap: 10px; align-items: center;">
-                        @if(auth()->check() && auth()->id() === $subasta->user_id)
-                        <a class="btn btn-warning" href="{{ route('subastas.edit', $subasta) }}">Editar subasta</a>
-                        @endif
-                        @if(auth()->user()->id === $subasta->user_id)
-                            <form action="{{ route('subastas.finalizar', $subasta) }}" method="POST">
+                            @if(auth()->check() && auth()->id() === $subasta->user_id)
+                            <a class="btn btn-warning" href="{{ route('subastas.edit', $subasta) }}">Editar subasta</a>
+                            @endif
+                            @if(auth()->user()->id === $subasta->user_id)
+                                <form action="{{ route('subastas.finalizar', $subasta) }}" method="POST">
+                                    @csrf
+                                    <button class="btn btn-success" type="submit">Finalizar Subasta</button>
+                                </form>
+                            @endif
+                
+                            <!-- Eliminar subasta (solo lo ve el dueño de la subasta) -->
+                            @if(auth()->check() && (auth()->id() === $subasta->user_id || auth()->user()->es_admin))
+                            <form id="deleteForm" action="{{route('subastas.destroy', $subasta)}}" method="POST">
                                 @csrf
-                                <button class="btn btn-success" type="submit">Finalizar Subasta</button>
+                                @method('delete')
+                                <button class="btn btn-danger" type="button" onclick="confirmDelete()">Eliminar subasta</button>
                             </form>
-                        @endif
-
-                        <!-- Eliminar subasta (solo lo ve el dueño de la subasta) -->
-                        @if(auth()->check() && (auth()->id() === $subasta->user_id || auth()->user()->es_admin))
-                        <form id="deleteForm" action="{{route('subastas.destroy', $subasta)}}" method="POST">
-                            @csrf
-                            @method('delete')
-                            <button class="btn btn-danger" type="button" onclick="confirmDelete()">Eliminar subasta</button>
-                        </form>
-                        @endif
-                        <script>
-                            function confirmDelete() {
-                                if (confirm("¿Estás seguro de que deseas eliminar esta subasta?")) {
-                                    document.getElementById("deleteForm").submit();
+                            @endif
+                            <script>
+                                function confirmDelete() {
+                                    if (confirm("¿Estás seguro de que deseas eliminar esta subasta?")) {
+                                        document.getElementById("deleteForm").submit();
+                                    }
                                 }
-                            }
-                        </script>
+                            </script>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script>
-        $('#search').autocomplete({ 
-        source: function(request, response){
-            $.ajax({
-                url: "{{route('search.subastas')}}",
-                dataType: 'json',
-                data: {
-                    term: request.term
-                },
-                success: function(data){
-                    response(data)
-                }
-            });
-        },
-        select: function(event, ui) {
-            window.location.href = "{{ route('subastas.show', '') }}/" + ui.item.slug;
-        }
-    });
-    </script>
+                
 </body>
 </html>

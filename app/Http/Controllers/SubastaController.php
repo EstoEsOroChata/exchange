@@ -125,9 +125,9 @@ class SubastaController extends Controller
         'puja' => 'required|numeric|min:0',
     ]);
 
-    //Se supone que esto comprueba la fecha pero creo que no va
+    //Comprueba la fecha límite
     if ($subasta->fecha_limite < now()) {
-        return redirect()->back()->with('error', 'La fecha límite de la subasta ha pasado.');
+        return redirect()->back()->withErrors(['puja' => 'La fecha límite ha pasado.']);
     }
 
     $user = auth()->user();
@@ -155,6 +155,12 @@ class SubastaController extends Controller
     //Método para comprar un producto
     public function comprar(Subasta $subasta)
 {
+
+    //Comprueba la fecha límite
+    if ($subasta->fecha_limite < now()) {
+        return redirect()->back()->withErrors(['compra' => 'La fecha límite ha pasado.']);
+    }
+
     //Para comprobar si el usuario esta logeado y tiene oro
     if (auth()->check() && auth()->user()->oro >= $subasta->precio) {
         //Le baja el oro
@@ -179,7 +185,7 @@ class SubastaController extends Controller
 
         return redirect()->route('subastas.index')->with('success', 'Compra realizada con éxito.');
     } else {
-        return redirect()->route('subastas.show', $subasta)->with('error', 'No tienes suficiente oro para comprar este producto.');
+        return redirect()->back()->withErrors(['compra' => 'No tienes suficiente oro.']);
     }
 }
     
