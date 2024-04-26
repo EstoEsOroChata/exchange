@@ -16,20 +16,14 @@ Route::view('nosotros', 'nosotros')->name('nosotros');
 Route::get('contacto',[ContactoController::class, 'index'])->name('contacto.index');
 Route::post('contacto', [ContactoController::class, 'store'])->name('contacto.store');
 
-Route::middleware('auth')->group(function () {
-    Route::resource('subastas', SubastaController::class)->except(['show', 'edit', 'update', 'destroy']);
-    Route::get('/subastas/{subasta}', [SubastaController::class, 'show'])->name('subastas.show');
-    Route::get('/subastas/{subasta}/edit', [SubastaController::class, 'edit'])->name('subastas.edit');
-    Route::put('/subastas/{subasta}', [SubastaController::class, 'update'])->name('subastas.update');
-    Route::post('/subastas/{subasta}/comprar', [SubastaController::class, 'comprar'])->name('subastas.comprar');
-    Route::post('/subastas/{subasta}/pujar', [SubastaController::class, 'pujar'])->name('subastas.pujar');
-    Route::post('/subastas/{subasta}/finalizar', [SubastaController::class, 'finalizarSubasta'])->name('subastas.finalizar');
-});
-
-//Redirige a página de error 403 para usuarios no autenticados
-Route::get('/subastas', function () {
-    abort(403, 'Acceso prohibido');
-})->name('subastas.index');
+//Rutas de subastas
+Route::resource('subastas', SubastaController::class);
+Route::get('/subastas/{subasta}', [SubastaController::class, 'show'])->name('subastas.show');
+Route::get('/subastas/{subasta}/edit', [SubastaController::class, 'edit'])->name('subastas.edit');
+Route::put('/subastas/{subasta}', [SubastaController::class, 'update'])->name('subastas.update');
+Route::post('/subastas/{subasta}/comprar', [SubastaController::class, 'comprar'])->name('subastas.comprar');
+Route::post('/subastas/{subasta}/pujar', [SubastaController::class, 'pujar'])->name('subastas.pujar');
+Route::post('/subastas/{subasta}/finalizar', [SubastaController::class, 'finalizarSubasta'])->name('subastas.finalizar');
 
 
 //Rutas de login y registro
@@ -39,14 +33,8 @@ Route::post('/validar-registro',[LoginController::class,'registro'])->name('vali
 Route::post('/iniciar-sesion',[LoginController::class,'login'])->name('login');
 Route::get('/cerrar-sesion',[LoginController::class,'logout'])->name('logout');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/perfil/{id}', [InventarioController::class, 'show'])->name('perfil.show');
-});
-
-//Redirige a página de error 403 para usuarios no autenticados
-Route::get('/perfil/{id}', function () {
-    abort(403, 'Acceso prohibido');
-})->name('perfil.show');
+//Rutas de perfil
+Route::get('/perfil/{id}', [InventarioController::class, 'show'])->middleware('auth')->name('perfil.show');
 
 //Rutas de búsquedas
 Route::get('search/subastas', [SearchController::class, 'subastas'])->name('search.subastas');
